@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Hungry - Food Menu</title>
+
+<link rel="stylesheet" href="static/style.css">
+```
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+```
+<div class="logo">
+    🍔 Hungry
+</div>
+
+<div class="nav-links">
+
+    <a href="index.html">
+        🏠 Home
+    </a>
+
+    <a href="stores.html">
+        🍴 Stores
+    </a>
+
+    <a href="orders.html">
+        📦 My Orders
+    </a>
+
+    <a href="cart.html">
+        🛒 Cart
+    </a>
+
+</div>
+```
+
+</div>
+
+<h1 class="page-title">
+    🍽️ Food Menu
+</h1>
+
+<p class="subtitle">
+    Delicious food delivered to your doorstep
+</p>
+
+<div class="menu-container">
+
+```
+<div class="category-card">
+
+    <h2>
+        🍗 Non-Vegetarian
+    </h2>
+
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Chicken Biryani
+            </h3>
+
+            <p class="price">
+                ₹220
+            </p>
+
+            <p class="food-description">
+                Aromatic basmati rice with delicious chicken.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/chicken_biryani.jpg"
+                    class="food-item-image"
+                    alt="Chicken Biryani"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Chicken Biryani',220)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Butter Chicken
+            </h3>
+
+            <p class="price">
+                ₹280
+            </p>
+
+            <p class="food-description">
+                Creamy and rich Indian butter chicken.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/butter_chicken.jpg"
+                    class="food-item-image"
+                    alt="Butter Chicken"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Butter Chicken',280)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Chicken Tikka
+            </h3>
+
+            <p class="price">
+                ₹240
+            </p>
+
+            <p class="food-description">
+                Juicy grilled chicken tikka.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/chicken_tikka.jpg"
+                    class="food-item-image"
+                    alt="Chicken Tikka"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Chicken Tikka',240)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<div class="category-card">
+
+    <h2>
+        🥗 Vegetarian
+    </h2>
+
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Paneer Tikka
+            </h3>
+
+            <p class="price">
+                ₹200
+            </p>
+
+            <p class="food-description">
+                Grilled paneer with Indian spices.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/paneer_tikka.jpg"
+                    class="food-item-image"
+                    alt="Paneer Tikka"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Paneer Tikka',200)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Veg Biryani
+            </h3>
+
+            <p class="price">
+                ₹180
+            </p>
+
+            <p class="food-description">
+                Fragrant rice cooked with fresh vegetables.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/veg_biryani.jpg"
+                    class="food-item-image"
+                    alt="Veg Biryani"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Veg Biryani',180)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Dal Makhani
+            </h3>
+
+            <p class="price">
+                ₹160
+            </p>
+
+            <p class="food-description">
+                Rich creamy black lentils.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/dal_makhani.jpg"
+                    class="food-item-image"
+                    alt="Dal Makhani"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Dal Makhani',160)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+
+</div>
+```
+
+</div>
+
+<div class="bottom-buttons">
+
+```
+<a
+    href="cart.html"
+    class="view-cart-btn"
+>
+    🛒 View Cart
+</a>
+
+
+<a
+    href="stores.html"
+    class="home-link"
+>
+    ← Back To Stores
+</a>
+```
+
+</div>
+
+<script>
+
+
+function addToCart(food, price) {
+
+
+    let cart =
+        JSON.parse(
+            localStorage.getItem(
+                "hungryCart"
+            )
+        ) || [];
+
+
+    let existingItem =
+        cart.find(function(item) {
+
+            return item.food === food;
+
+        });
+
+
+    if (existingItem) {
+
+        existingItem.quantity =
+            (Number(existingItem.quantity) || 1) + 1;
+
+    } else {
+
+        cart.push({
+
+            food: food,
+
+            price: Number(price),
+
+            quantity: 1
+
+        });
+
+    }
+
+
+    localStorage.setItem(
+        "hungryCart",
+        JSON.stringify(cart)
+    );
+
+
+    alert(
+        food + " added to cart! 🛒"
+    );
+
+}
+
+
+</script>
+
+</body>
+
+</html>
