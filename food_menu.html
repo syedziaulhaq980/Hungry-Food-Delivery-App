@@ -4,7 +4,7 @@
 
 <head>
 
-```
+
 <meta charset="UTF-8">
 
 <meta name="viewport"
@@ -13,7 +13,7 @@
 <title>Hungry - Food Menu</title>
 
 <link rel="stylesheet" href="static/style.css">
-```
+
 
 </head>
 
@@ -21,31 +21,31 @@
 
 <div class="navbar">
 
-```
-<div class="logo">
-    🍔 Hungry
-</div>
 
-<div class="nav-links">
+    <div class="logo">
+        🍔 Hungry
+    </div>
 
-    <a href="index.html">
-        🏠 Home
-    </a>
+    <div class="nav-links">
 
-    <a href="stores.html">
-        🍴 Stores
-    </a>
+        <a href="index.html">
+            🏠 Home
+        </a>
 
-    <a href="orders.html">
-        📦 My Orders
-    </a>
+        <a href="stores.html">
+            🍴 Stores
+        </a>
 
-    <a href="cart.html">
-        🛒 Cart
-    </a>
+        <a href="orders.html">
+            📦 My Orders
+        </a>
 
-</div>
-```
+        <a href="cart.html">
+            🛒 Cart
+        </a>
+
+    </div>
+
 
 </div>
 
@@ -59,7 +59,7 @@
 
 <div class="menu-container">
 
-```
+
 <div class="category-card">
 
     <h2>
@@ -369,15 +369,11 @@
 
 <script>
 
-
 function addToCart(food, price) {
-
 
     let cart =
         JSON.parse(
-            localStorage.getItem(
-                "hungryCart"
-            )
+            localStorage.getItem("hungryCart")
         ) || [];
 
 
@@ -420,7 +416,6 @@ function addToCart(food, price) {
     );
 
 }
-
 
 </script>
 
