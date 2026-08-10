@@ -39,7 +39,7 @@
         🍴 Stores
     </a>
 
-    <a href="menu.html">
+    <a href="food_menu.html">
         🍽️ Menu
     </a>
 
@@ -52,22 +52,28 @@
 
 </div>
 
-<h1 class="cart-title">
-    💳 Payment
-</h1>
+<!-- PAYMENT -->
 
 <div class="payment-box">
 
 ```
+<h1 class="cart-title">
+    💳 Payment
+</h1>
+
+
 <h2>
     Choose Payment Method
 </h2>
 
 
-<p id="customer-name"></p>
+<p id="customer-name">
+</p>
 
 
-<form onsubmit="confirmOrder(event)">
+<form
+    onsubmit="confirmOrder(event)"
+>
 
 
     <label>
@@ -112,7 +118,7 @@
 
     <h3>
 
-        Total Amount :
+        Total Amount:
 
         <span id="total-amount">
             ₹0
@@ -136,91 +142,57 @@
 
 <script>
 
-
-/* ========================= */
-/* GET CART */
-/* ========================= */
-
-
 function getCart() {
-
 
     return JSON.parse(
         localStorage.getItem("hungryCart")
     ) || [];
 
+}
+
+
+function getCustomer() {
+
+    return JSON.parse(
+        localStorage.getItem("hungryCustomer")
+    ) || null;
 
 }
 
 
-/* ========================= */
-/* CALCULATE TOTAL */
-/* ========================= */
-
-
 function calculateTotal() {
 
+    const cart = getCart();
 
-    let cart = getCart();
-
-
-    let total = 0;
+    let itemTotal = 0;
 
 
     cart.forEach(function(item) {
 
-
-        let price =
+        const price =
             Number(item.price) || 0;
 
-
-        let quantity =
+        const quantity =
             Number(item.quantity) || 1;
 
-
-        total +=
+        itemTotal +=
             price * quantity;
 
     });
 
 
-    let deliveryFee = 40;
-
-
-    return total + deliveryFee;
+    return itemTotal + 40;
 
 }
 
 
-/* ========================= */
-/* LOAD CUSTOMER */
-/* ========================= */
+function displayPaymentDetails() {
+
+    const customer =
+        getCustomer();
 
 
-function loadPaymentData() {
-
-
-    let customer =
-        JSON.parse(
-            localStorage.getItem(
-                "hungryCustomer"
-            )
-        );
-
-
-    if (customer) {
-
-
-        document.getElementById(
-            "customer-name"
-        ).innerText =
-            "Order for " +
-            customer.name;
-
-    }
-
-
-    let total =
+    const total =
         calculateTotal();
 
 
@@ -230,94 +202,71 @@ function loadPaymentData() {
         "₹" + total;
 
 
+    if (customer) {
+
+        document.getElementById(
+            "customer-name"
+        ).innerText =
+            "👤 Customer: " + customer.name;
+
+    }
+
 }
-
-
-/* ========================= */
-/* CONFIRM ORDER */
-/* ========================= */
 
 
 function confirmOrder(event) {
 
-
     event.preventDefault();
 
 
-    let selectedPayment =
+    const cart =
+        getCart();
+
+
+    const customer =
+        getCustomer();
+
+
+    const payment =
         document.querySelector(
             'input[name="payment"]:checked'
-        );
-
-
-    if (!selectedPayment) {
-
-
-        alert(
-            "Please select a payment method."
-        );
-
-
-        return;
-
-    }
-
-
-    let paymentMethod =
-        selectedPayment.value;
-
-
-    let cart = getCart();
+        ).value;
 
 
     if (cart.length === 0) {
-
 
         alert(
             "Your cart is empty! 🛒"
         );
 
-
         window.location.href =
-            "menu.html";
-
+            "stores.html";
 
         return;
 
     }
 
 
-    let customer =
-        JSON.parse(
-            localStorage.getItem(
-                "hungryCustomer"
-            )
-        ) || {};
+    const total =
+        calculateTotal();
 
 
-    let order = {
-
+    const order = {
 
         id:
-            "HUNGRY-" +
             Date.now(),
-
 
         customer:
             customer,
 
-
         items:
             cart,
 
-
         payment:
-            paymentMethod,
-
+            payment,
 
         total:
-            calculateTotal(),
-
+            total,
 
         date:
             new Date().toLocaleString()
@@ -325,13 +274,9 @@ function confirmOrder(event) {
     };
 
 
-    /* SAVE ORDER */
-
     let orders =
         JSON.parse(
-            localStorage.getItem(
-                "hungryOrders"
-            )
+            localStorage.getItem("hungryOrders")
         ) || [];
 
 
@@ -344,22 +289,14 @@ function confirmOrder(event) {
     );
 
 
-    /* SAVE CURRENT ORDER */
-
-    localStorage.setItem(
-        "hungryCurrentOrder",
-        JSON.stringify(order)
-    );
-
-
-    /* CLEAR CART */
+    // Clear cart after successful order
 
     localStorage.removeItem(
         "hungryCart"
     );
 
 
-    /* GO TO SUCCESS PAGE */
+    // Go to success page
 
     window.location.href =
         "order_success.html";
@@ -367,8 +304,7 @@ function confirmOrder(event) {
 }
 
 
-loadPaymentData();
-
+displayPaymentDetails();
 
 </script>
 
