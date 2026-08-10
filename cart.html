@@ -39,16 +39,18 @@
         🍴 Stores
     </a>
 
-    <a href="menu.html">
-        🍽️ Menu
-    </a>
-
     <a href="orders.html">
         📦 My Orders
     </a>
 
     <a href="cart.html" class="active">
         🛒 Cart
+        <span
+            id="cart-count"
+            class="cart-count"
+        >
+            0
+        </span>
     </a>
 
 </div>
@@ -60,288 +62,38 @@
     🛒 Your Cart
 </h1>
 
-<div id="cart-content"></div>
+<div
+    id="cart-container"
+    class="cart-container"
+>
+</div>
 
 <script>
 
 
-function loadCart() {
+/* ========================= */
+/* GET CART */
+/* ========================= */
 
 
-    let cart =
-        JSON.parse(
-            localStorage.getItem("hungryCart")
-        ) || [];
+function getCart() {
 
 
-    let container =
-        document.getElementById(
-            "cart-content"
-        );
-
-
-    /* EMPTY CART */
-
-    if (cart.length === 0) {
-
-
-        container.innerHTML = `
-
-            <div class="empty-cart">
-
-                <div class="empty-cart-icon">
-                    🛒
-                </div>
-
-                <h2>
-                    Your Cart Is Empty
-                </h2>
-
-                <p>
-                    Looks like you haven't added
-                    anything to your cart yet.
-                </p>
-
-                <a href="menu.html">
-                    Start Ordering
-                </a>
-
-            </div>
-
-        `;
-
-
-        return;
-
-    }
-
-
-    let total = 0;
-
-    let itemsHTML = "";
-
-
-    cart.forEach(function(item, index) {
-
-
-        let quantity =
-            Number(item.quantity) || 1;
-
-
-        let price =
-            Number(item.price) || 0;
-
-
-        let itemTotal =
-            price * quantity;
-
-
-        total += itemTotal;
-
-
-        itemsHTML += `
-
-            <div class="cart-card">
-
-
-                <div class="cart-food-info">
-
-
-                    <div class="food-icon">
-                        🍽️
-                    </div>
-
-
-                    <div>
-
-                        <h2>
-                            ${item.food}
-                        </h2>
-
-                        <p>
-                            ₹${price} per item
-                        </p>
-
-                    </div>
-
-
-                </div>
-
-
-                <div class="quantity-box">
-
-
-                    <button
-                        onclick="decreaseQuantity(${index})"
-                        style="
-                            border:none;
-                            background:transparent;
-                            color:#ff5200;
-                            font-size:20px;
-                            font-weight:bold;
-                            cursor:pointer;
-                            margin-right:12px;
-                        "
-                    >
-                        −
-                    </button>
-
-
-                    <span>
-                        ${quantity}
-                    </span>
-
-
-                    <button
-                        onclick="increaseQuantity(${index})"
-                        style="
-                            border:none;
-                            background:transparent;
-                            color:#ff5200;
-                            font-size:20px;
-                            font-weight:bold;
-                            cursor:pointer;
-                            margin-left:12px;
-                        "
-                    >
-                        +
-                    </button>
-
-
-                </div>
-
-
-                <div class="item-total">
-
-                    ₹${itemTotal}
-
-                </div>
-
-
-                <button
-                    onclick="removeItem(${index})"
-                    style="
-                        border:none;
-                        background:none;
-                        color:#ff5200;
-                        font-size:20px;
-                        cursor:pointer;
-                    "
-                    title="Remove item"
-                >
-                    ❌
-                </button>
-
-
-            </div>
-
-        `;
-
-    });
-
-
-    let deliveryFee = 40;
-
-    let grandTotal =
-        total + deliveryFee;
-
-
-    container.innerHTML = `
-
-        <div class="cart-container">
-
-
-            ${itemsHTML}
-
-
-            <div class="bill-box">
-
-
-                <h2>
-                    🧾 Bill Details
-                </h2>
-
-
-                <p>
-
-                    <span>
-                        Item Total
-                    </span>
-
-                    <span>
-                        ₹${total}
-                    </span>
-
-                </p>
-
-
-                <p>
-
-                    <span>
-                        Delivery Fee
-                    </span>
-
-                    <span>
-                        ₹${deliveryFee}
-                    </span>
-
-                </p>
-
-
-                <p class="grand-total">
-
-                    <span>
-                        Grand Total
-                    </span>
-
-                    <span>
-                        ₹${grandTotal}
-                    </span>
-
-                </p>
-
-
-                <a
-                    href="checkout.html"
-                    class="checkout-btn"
-                >
-                    Proceed To Checkout
-                </a>
-
-
-            </div>
-
-
-        </div>
-
-
-        <a
-            href="menu.html"
-            class="continue-btn"
-        >
-            ← Continue Shopping
-        </a>
-
-    `;
+    return JSON.parse(
+        localStorage.getItem(
+            "hungryCart"
+        )
+    ) || [];
 
 }
 
 
 /* ========================= */
-/* INCREASE QUANTITY */
+/* SAVE CART */
 /* ========================= */
 
-function increaseQuantity(index) {
 
-
-    let cart =
-        JSON.parse(
-            localStorage.getItem("hungryCart")
-        ) || [];
-
-
-    cart[index].quantity =
-        (Number(cart[index].quantity) || 1) + 1;
+function saveCart(cart) {
 
 
     localStorage.setItem(
@@ -349,23 +101,68 @@ function increaseQuantity(index) {
         JSON.stringify(cart)
     );
 
+}
 
-    loadCart();
+
+/* ========================= */
+/* UPDATE CART COUNT */
+/* ========================= */
+
+
+function updateCartCount(cart) {
+
+
+    let count = 0;
+
+
+    cart.forEach(function(item) {
+
+
+        count +=
+            Number(item.quantity) || 1;
+
+    });
+
+
+    document.getElementById(
+        "cart-count"
+    ).innerText = count;
 
 }
 
 
 /* ========================= */
-/* DECREASE QUANTITY */
+/* INCREASE */
 /* ========================= */
+
+
+function increaseQuantity(index) {
+
+
+    let cart = getCart();
+
+
+    cart[index].quantity =
+        (Number(cart[index].quantity) || 1) + 1;
+
+
+    saveCart(cart);
+
+
+    displayCart();
+
+}
+
+
+/* ========================= */
+/* DECREASE */
+/* ========================= */
+
 
 function decreaseQuantity(index) {
 
 
-    let cart =
-        JSON.parse(
-            localStorage.getItem("hungryCart")
-        ) || [];
+    let cart = getCart();
 
 
     let quantity =
@@ -387,45 +184,294 @@ function decreaseQuantity(index) {
     }
 
 
-    localStorage.setItem(
-        "hungryCart",
-        JSON.stringify(cart)
-    );
+    saveCart(cart);
 
 
-    loadCart();
+    displayCart();
 
 }
 
 
 /* ========================= */
-/* REMOVE ITEM */
+/* REMOVE */
 /* ========================= */
+
 
 function removeItem(index) {
 
 
-    let cart =
-        JSON.parse(
-            localStorage.getItem("hungryCart")
-        ) || [];
+    let cart = getCart();
 
 
     cart.splice(index, 1);
 
 
-    localStorage.setItem(
-        "hungryCart",
-        JSON.stringify(cart)
-    );
+    saveCart(cart);
 
 
-    loadCart();
+    displayCart();
 
 }
 
 
-loadCart();
+/* ========================= */
+/* DISPLAY CART */
+/* ========================= */
+
+
+function displayCart() {
+
+
+    let cart = getCart();
+
+
+    let container =
+        document.getElementById(
+            "cart-container"
+        );
+
+
+    updateCartCount(cart);
+
+
+    /* EMPTY CART */
+
+
+    if (cart.length === 0) {
+
+
+        container.innerHTML = `
+
+            <div class="empty-cart">
+
+                <div class="empty-cart-icon">
+                    🛒
+                </div>
+
+                <h2>
+                    Your Cart Is Empty
+                </h2>
+
+                <p>
+                    Add something delicious to your cart!
+                </p>
+
+                <a href="stores.html">
+                    Start Ordering
+                </a>
+
+            </div>
+
+        `;
+
+
+        return;
+
+    }
+
+
+    let subtotal = 0;
+
+
+    let itemsHTML = "";
+
+
+    cart.forEach(function(item, index) {
+
+
+        let price =
+            Number(item.price) || 0;
+
+
+        let quantity =
+            Number(item.quantity) || 1;
+
+
+        let total =
+            price * quantity;
+
+
+        subtotal += total;
+
+
+        itemsHTML += `
+
+            <div class="cart-card">
+
+
+                <div class="cart-food-info">
+
+
+                    <div class="food-icon">
+                        🛍️
+                    </div>
+
+
+                    <div>
+
+                        <h2>
+                            ${item.food}
+                        </h2>
+
+
+                        <p>
+                            ₹${price} each
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <div
+                    class="quantity-box"
+                >
+
+                    <button
+                        onclick="decreaseQuantity(${index})"
+                        style="
+                            border:none;
+                            background:none;
+                            cursor:pointer;
+                            font-size:20px;
+                        "
+                    >
+                        −
+                    </button>
+
+
+                    ${quantity}
+
+
+                    <button
+                        onclick="increaseQuantity(${index})"
+                        style="
+                            border:none;
+                            background:none;
+                            cursor:pointer;
+                            font-size:20px;
+                        "
+                    >
+                        +
+                    </button>
+
+                </div>
+
+
+                <div class="item-total">
+
+                    ₹${total}
+
+                </div>
+
+
+                <button
+                    onclick="removeItem(${index})"
+                    style="
+                        border:none;
+                        background:#ffe5dc;
+                        color:#ff5200;
+                        padding:8px 12px;
+                        border-radius:20px;
+                        cursor:pointer;
+                    "
+                >
+                    Remove
+                </button>
+
+
+            </div>
+
+        `;
+
+    });
+
+
+    let deliveryFee = 40;
+
+
+    let grandTotal =
+        subtotal + deliveryFee;
+
+
+    container.innerHTML = `
+
+        ${itemsHTML}
+
+
+        <div class="bill-box">
+
+
+            <h2>
+                🧾 Bill Details
+            </h2>
+
+
+            <p>
+
+                <span>
+                    Subtotal
+                </span>
+
+                <span>
+                    ₹${subtotal}
+                </span>
+
+            </p>
+
+
+            <p>
+
+                <span>
+                    Delivery Fee
+                </span>
+
+                <span>
+                    ₹${deliveryFee}
+                </span>
+
+            </p>
+
+
+            <p class="grand-total">
+
+                <span>
+                    Grand Total
+                </span>
+
+                <span>
+                    ₹${grandTotal}
+                </span>
+
+            </p>
+
+
+            <a
+                href="checkout.html"
+                class="checkout-btn"
+            >
+                Proceed To Checkout
+            </a>
+
+
+        </div>
+
+
+        <a
+            href="stores.html"
+            class="continue-btn"
+        >
+            ← Continue Shopping
+        </a>
+
+    `;
+
+}
+
+
+displayCart();
 
 
 </script>
