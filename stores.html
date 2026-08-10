@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hungry - Stores</title>
+
+    <link rel="stylesheet" href="static/style.css">
+</head>
+
+<body>
+
+    <div class="logo">
+        🍔 Hungry
+    </div>
+
+    <nav>
+        <a href="index.html">
+            🏠 Home
+        </a>
+
+        <a href="stores.html" class="active">
+            🍴 Stores
+        </a>
+
+        <a href="cart.html">
+            🛒 Cart
+        </a>
+
+        <a href="orders.html">
+            📦 My Orders
+        </a>
+    </nav>
+
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔍 Search Restaurant..."
+        >
+
+        <button onclick="searchStores()">
+            Search
+        </button>
+
+    </div>
+
+
+    <div id="stores-container">
+
+        <div class="store">
+
+            <img
+                src="static/images/biryani_house.jpg"
+                class="store-image"
+                alt="Biryani House"
+            >
+
+            <h2>Biryani House</h2>
+
+            <p>⭐ 4.5</p>
+
+            <a href="#" class="explore-btn">
+                View Menu
+            </a>
+
+        </div>
+
+
+        <div class="store">
+
+            <img
+                src="static/images/food_fusion.jpg"
+                class="store-image"
+                alt="Food Fusion"
+            >
+
+            <h2>Food Fusion</h2>
+
+            <p>⭐ 4.3</p>
+
+            <a href="#" class="explore-btn">
+                View Menu
+            </a>
+
+        </div>
+
+
+        <div class="store">
+
+            <img
+                src="static/images/ghar_ka_khana.jpg"
+                class="store-image"
+                alt="Ghar Ka Khana"
+            >
+
+            <h2>Ghar Ka Khana</h2>
+
+            <p>⭐ 4.6</p>
+
+            <a href="#" class="explore-btn">
+                View Menu
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+    <a href="index.html">
+        ← Back Home
+    </a>
+
+
+    <script>
+
+        function searchStores() {
+
+            let search =
+                document.getElementById("searchInput")
+                .value
+                .toLowerCase();
+
+            let stores =
+                document.querySelectorAll(".store");
+
+            stores.forEach(function(store) {
+
+                let name =
+                    store.querySelector("h2")
+                    .innerText
+                    .toLowerCase();
+
+                if (name.includes(search)) {
+
+                    store.style.display = "";
+
+                } else {
+
+                    store.style.display = "none";
+
+                }
+
+            });
+
+        }
+
+    </script>
+
+</body>
+</html>
