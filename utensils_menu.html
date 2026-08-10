@@ -775,6 +775,50 @@ function addToCart(food, price) {
 
 
 </script>
+<script>
+
+function addToCart(food, price) {
+
+    let cart =
+        JSON.parse(localStorage.getItem("hungryCart")) || [];
+
+
+    let existingItem = cart.find(
+        item => item.food === food
+    );
+
+
+    if (existingItem) {
+
+        existingItem.quantity += 1;
+
+    } else {
+
+        cart.push({
+
+            food: food,
+
+            price: price,
+
+            quantity: 1
+
+        });
+
+    }
+
+
+    localStorage.setItem(
+        "hungryCart",
+        JSON.stringify(cart)
+    );
+
+
+    alert(food + " added to cart! 🛒");
+
+}
+
+</script>
+
 
 </body>
 
