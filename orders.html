@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Hungry - My Orders</title>
+
+<link rel="stylesheet" href="static/style.css">
+```
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+```
+<div class="logo">
+    🍔 Hungry
+</div>
+
+
+<div class="nav-links">
+
+    <a href="index.html">
+        🏠 Home
+    </a>
+
+    <a href="stores.html">
+        🍴 Stores
+    </a>
+
+    <a href="menu.html">
+        🍽️ Menu
+    </a>
+
+    <a href="orders.html" class="active">
+        📦 My Orders
+    </a>
+
+    <a href="cart.html">
+        🛒 Cart
+    </a>
+
+</div>
+```
+
+</div>
+
+<h1 class="cart-title">
+    📦 My Orders
+</h1>
+
+<div
+    class="orders-container"
+    id="orders-container"
+>
+</div>
+
+<script>
+
+
+/* ========================= */
+/* LOAD ORDERS */
+/* ========================= */
+
+
+function loadOrders() {
+
+
+    let orders =
+        JSON.parse(
+            localStorage.getItem(
+                "hungryOrders"
+            )
+        ) || [];
+
+
+    let container =
+        document.getElementById(
+            "orders-container"
+        );
+
+
+    /* EMPTY ORDERS */
+
+    if (orders.length === 0) {
+
+
+        container.innerHTML = `
+
+            <div class="empty-cart">
+
+                <div class="empty-cart-icon">
+                    📦
+                </div>
+
+                <h2>
+                    No Orders Yet
+                </h2>
+
+                <p>
+                    You haven't placed any orders yet.
+                </p>
+
+                <a href="menu.html">
+                    Start Ordering
+                </a>
+
+            </div>
+
+        `;
+
+
+        return;
+
+    }
+
+
+    /* SHOW NEWEST ORDER FIRST */
+
+    orders.reverse();
+
+
+    let html = "";
+
+
+    orders.forEach(function(order) {
+
+
+        let itemsHTML = "";
+
+
+        order.items.forEach(function(item) {
+
+
+            let quantity =
+                Number(item.quantity) || 1;
+
+
+            let price =
+                Number(item.price) || 0;
+
+
+            let itemTotal =
+                price * quantity;
+
+
+            itemsHTML += `
+
+                <p>
+
+                    <span>
+                        ${item.food}
+                        × ${quantity}
+                    </span>
+
+                    <span>
+                        ₹${itemTotal}
+                    </span>
+
+                </p>
+
+            `;
+
+        });
+
+
+        html += `
+
+            <div class="order-card">
+
+
+                <h2>
+                    🎉 Order Placed
+                </h2>
+
+
+                <p>
+                    <strong>
+                        Order ID:
+                    </strong>
+
+                    ${order.id}
+                </p>
+
+
+                <p>
+                    <strong>
+                        Date:
+                    </strong>
+
+                    ${order.date}
+                </p>
+
+
+                <p>
+                    <strong>
+                        Payment:
+                    </strong>
+
+                    ${order.payment}
+                </p>
+
+
+                <h3>
+                    🍽️ Items
+                </h3>
+
+
+                ${itemsHTML}
+
+
+                <h3>
+
+                    💰 Total:
+
+                    <span
+                        style="color:#ff5200;"
+                    >
+                        ₹${order.total}
+                    </span>
+
+                </h3>
+
+
+                <p>
+
+                    <strong>
+                        📍 Delivery Address:
+                    </strong>
+
+                    ${
+                        order.customer
+                        ? order.customer.address
+                        : "Not available"
+                    }
+
+                </p>
+
+
+            </div>
+
+        `;
+
+    });
+
+
+    container.innerHTML = html;
+
+}
+
+
+loadOrders();
+
+
+</script>
+
+</body>
+
+</html>
