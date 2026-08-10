@@ -39,38 +39,43 @@
         🍴 Stores
     </a>
 
-    <a href="cart.html">
-        🛒 Cart
-    </a>
-
     <a href="orders.html">
         📦 My Orders
+    </a>
+
+    <a href="cart.html">
+        🛒 Cart
+        <span id="cart-count"
+              class="cart-count">
+            0
+        </span>
     </a>
 
 </div>
 ```
 
 </div>
-
-<!-- PAGE TITLE -->
 
 <h1 class="page-title">
     🍴 Explore Stores
 </h1>
 
 <p class="subtitle">
-    Choose your favourite restaurant
+    Choose what you want to order
 </p>
 
 <!-- SEARCH -->
 
-<form class="search-form" onsubmit="searchStores(event)">
+<form
+    class="search-form"
+    onsubmit="searchStores(event)"
+>
 
 ```
 <input
     type="text"
     id="searchInput"
-    placeholder="🔍 Search Restaurant..."
+    placeholder="🔍 Search Store..."
 >
 
 <button type="submit">
@@ -82,10 +87,14 @@
 
 <!-- STORES -->
 
-<div class="store-container">
+<div
+    class="store-container"
+    id="stores-container"
+>
 
 ```
-<!-- BIRYANI HOUSE -->
+<!-- FOOD STORES -->
+
 
 <div class="store-card">
 
@@ -100,7 +109,7 @@
     </h2>
 
     <p>
-        Authentic and delicious biryani
+        🍛 Delicious Biryani & Indian Food
     </p>
 
     <span class="rating">
@@ -119,8 +128,6 @@
 </div>
 
 
-<!-- FOOD FUSION -->
-
 <div class="store-card">
 
     <img
@@ -134,7 +141,7 @@
     </h2>
 
     <p>
-        Delicious Indian and international food
+        🍽️ Multi-Cuisine Restaurant
     </p>
 
     <span class="rating">
@@ -153,8 +160,6 @@
 </div>
 
 
-<!-- GHAR KA KHANA -->
-
 <div class="store-card">
 
     <img
@@ -168,7 +173,7 @@
     </h2>
 
     <p>
-        Homestyle food made with love
+        🏠 Homemade Indian Food
     </p>
 
     <span class="rating">
@@ -185,38 +190,141 @@
     </a>
 
 </div>
+
+
+<!-- GROCERY -->
+
+
+<div class="store-card">
+
+    <img
+        src="static/images/grocery.jpg"
+        class="store-image"
+        alt="Hungry Grocery"
+    >
+
+    <h2>
+        Hungry Grocery
+    </h2>
+
+    <p>
+        🛒 Groceries & Daily Essentials
+    </p>
+
+    <span class="rating">
+        ⭐ 4.4
+    </span>
+
+    <br>
+
+    <a
+        href="menu.html"
+        class="btn"
+    >
+        View Products
+    </a>
+
+</div>
+
+
+<!-- UTENSILS -->
+
+
+<div class="store-card">
+
+    <img
+        src="static/images/utensils.jpg"
+        class="store-image"
+        alt="Hungry Utensils"
+    >
+
+    <h2>
+        Hungry Utensils
+    </h2>
+
+    <p>
+        🍳 Kitchen & Cooking Essentials
+    </p>
+
+    <span class="rating">
+        ⭐ 4.2
+    </span>
+
+    <br>
+
+    <a
+        href="menu.html"
+        class="btn"
+    >
+        View Products
+    </a>
+
+</div>
 ```
 
 </div>
 
+<br>
+
+<a
+href="index.html"
+class="continue-btn"
+
+>
+
+```
+← Back Home
+```
+
+</a>
+
 <script>
 
+
+/* ========================= */
+/* SEARCH STORES */
+/* ========================= */
+
+
 function searchStores(event) {
+
 
     event.preventDefault();
 
 
     let search =
-        document
-        .getElementById("searchInput")
+        document.getElementById(
+            "searchInput"
+        )
         .value
         .toLowerCase();
 
 
     let stores =
-        document.querySelectorAll(".store-card");
+        document.querySelectorAll(
+            ".store-card"
+        );
 
 
     stores.forEach(function(store) {
 
+
         let name =
-            store
-            .querySelector("h2")
+            store.querySelector("h2")
             .innerText
             .toLowerCase();
 
 
-        if (name.includes(search)) {
+        let description =
+            store.querySelector("p")
+            .innerText
+            .toLowerCase();
+
+
+        if (
+            name.includes(search) ||
+            description.includes(search)
+        ) {
 
             store.style.display = "";
 
@@ -229,6 +337,45 @@ function searchStores(event) {
     });
 
 }
+
+
+/* ========================= */
+/* CART COUNT */
+/* ========================= */
+
+
+function updateCartCount() {
+
+
+    let cart =
+        JSON.parse(
+            localStorage.getItem(
+                "hungryCart"
+            )
+        ) || [];
+
+
+    let count = 0;
+
+
+    cart.forEach(function(item) {
+
+
+        count +=
+            Number(item.quantity) || 1;
+
+    });
+
+
+    document.getElementById(
+        "cart-count"
+    ).innerText = count;
+
+}
+
+
+updateCartCount();
+
 
 </script>
 
