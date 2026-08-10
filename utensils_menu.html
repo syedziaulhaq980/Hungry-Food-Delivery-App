@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Hungry - Utensils</title>
+
+<link rel="stylesheet" href="static/style.css">
+```
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+```
+<div class="logo">
+    🍔 Hungry
+</div>
+
+
+<div class="nav-links">
+
+    <a href="index.html">
+        🏠 Home
+    </a>
+
+    <a href="stores.html">
+        🍴 Stores
+    </a>
+
+    <a href="orders.html">
+        📦 My Orders
+    </a>
+
+    <a href="cart.html">
+        🛒 Cart
+    </a>
+
+</div>
+```
+
+</div>
+
+<h1 class="page-title">
+    🍳 Kitchen & Utensils
+</h1>
+
+<p class="subtitle">
+    Quality kitchen essentials for your home
+</p>
+
+<div class="menu-container">
+
+```
+<!-- TABLEWARE -->
+
+<div class="category-card">
+
+    <h2>
+        🍽️ Tableware
+    </h2>
+
+
+    <!-- Steel Plate -->
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Steel Plate
+            </h3>
+
+            <p class="price">
+                ₹120
+            </p>
+
+            <p class="food-description">
+                Durable stainless steel plate.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/steel_plate.jpg"
+                    class="food-item-image"
+                    alt="Steel Plate"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Steel Plate',120)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Steel Glass -->
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Steel Glass
+            </h3>
+
+            <p class="price">
+                ₹80
+            </p>
+
+            <p class="food-description">
+                Premium stainless steel drinking glass.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/steel_glass.jpg"
+                    class="food-item-image"
+                    alt="Steel Glass"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Steel Glass',80)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Steel Bowl -->
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Steel Bowl
+            </h3>
+
+            <p class="price">
+                ₹60
+            </p>
+
+            <p class="food-description">
+                Strong stainless steel serving bowl.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/steel_bowl.jpg"
+                    class="food-item-image"
+                    alt="Steel Bowl"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Steel Bowl',60)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Spoon Set -->
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Spoon Set (6 pcs)
+            </h3>
+
+            <p class="price">
+                ₹150
+            </p>
+
+            <p class="food-description">
+                Stainless steel spoon set.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/spoon_set.jpg"
+                    class="food-item-image"
+                    alt="Spoon Set"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Spoon Set (6 pcs)',150)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Fork Set -->
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Fork Set (6 pcs)
+            </h3>
+
+            <p class="price">
+                ₹180
+            </p>
+
+            <p class="food-description">
+                Stainless steel fork set.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/fork_set.jpg"
+                    class="food-item-image"
+                    alt="Fork Set"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Fork Set (6 pcs)',180)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- COOKING UTENSILS -->
+
+<div class="category-card">
+
+    <h2>
+        🍳 Cooking Essentials
+    </h2>
+
+
+    <!-- Frying Pan -->
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Frying Pan
+            </h3>
+
+            <p class="price">
+                ₹650
+            </p>
+
+            <p class="food-description">
+                Non-stick frying pan for everyday cooking.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/frying_pan.jpg"
+                    class="food-item-image"
+                    alt="Frying Pan"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Frying Pan',650)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Pressure Cooker -->
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Pressure Cooker
+            </h3>
+
+            <p class="price">
+                ₹1200
+            </p>
+
+            <p class="food-description">
+                Durable pressure cooker for everyday meals.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/pressure_cooker.jpg"
+                    class="food-item-image"
+                    alt="Pressure Cooker"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Pressure Cooker',1200)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Kadai -->
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Kadai
+            </h3>
+
+            <p class="price">
+                ₹750
+            </p>
+
+            <p class="food-description">
+                Heavy-duty kadai for Indian cooking.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/kadai.jpg"
+                    class="food-item-image"
+                    alt="Kadai"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Kadai',750)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Tawa -->
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Tawa
+            </h3>
+
+            <p class="price">
+                ₹500
+            </p>
+
+            <p class="food-description">
+                Flat cooking tawa for roti and dosa.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/tawa.jpg"
+                    class="food-item-image"
+                    alt="Tawa"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Tawa',500)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Chopping Board -->
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Chopping Board
+            </h3>
+
+            <p class="price">
+                ₹250
+            </p>
+
+            <p class="food-description">
+                Durable kitchen chopping board.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/chopping_board.jpg"
+                    class="food-item-image"
+                    alt="Chopping Board"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Chopping Board',250)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- STORAGE -->
+
+<div class="category-card">
+
+    <h2>
+        🥡 Storage & Kitchen
+    </h2>
+
+
+    <!-- Lunch Box -->
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Lunch Box
+            </h3>
+
+            <p class="price">
+                ₹350
+            </p>
+
+            <p class="food-description">
+                Convenient food storage lunch box.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/lunch_box.jpg"
+                    class="food-item-image"
+                    alt="Lunch Box"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Lunch Box',350)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Storage Container -->
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Storage Container
+            </h3>
+
+            <p class="price">
+                ₹300
+            </p>
+
+            <p class="food-description">
+                Airtight container for food storage.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/storage_container.jpg"
+                    class="food-item-image"
+                    alt="Storage Container"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Storage Container',300)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Water Bottle -->
+
+    <div class="food-card">
+
+        <div class="food-info">
+
+            <h3>
+                Water Bottle
+            </h3>
+
+            <p class="price">
+                ₹250
+            </p>
+
+            <p class="food-description">
+                Reusable stainless steel water bottle.
+            </p>
+
+        </div>
+
+
+        <div class="food-right">
+
+            <div class="food-image-box">
+
+                <img
+                    src="static/images/water_bottle.jpg"
+                    class="food-item-image"
+                    alt="Water Bottle"
+                >
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Water Bottle',250)"
+            >
+                Add
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- BOTTOM BUTTONS -->
+
+<div class="bottom-buttons">
+
+```
+<a
+    href="cart.html"
+    class="view-cart-btn"
+>
+    🛒 View Cart
+</a>
+
+
+<a
+    href="stores.html"
+    class="home-link"
+>
+    ← Back To Stores
+</a>
+```
+
+</div>
+
+<script>
+
+
+function addToCart(food, price) {
+
+
+    let cart =
+        JSON.parse(
+            localStorage.getItem(
+                "hungryCart"
+            )
+        ) || [];
+
+
+    let existingItem =
+        cart.find(function(item) {
+
+            return item.food === food;
+
+        });
+
+
+    if (existingItem) {
+
+        existingItem.quantity =
+            (Number(existingItem.quantity) || 1) + 1;
+
+    } else {
+
+        cart.push({
+
+            food: food,
+
+            price: Number(price),
+
+            quantity: 1
+
+        });
+
+    }
+
+
+    localStorage.setItem(
+        "hungryCart",
+        JSON.stringify(cart)
+    );
+
+
+    alert(
+        food + " added to cart! 🛒"
+    );
+
+}
+
+
+</script>
+
+</body>
+
+</html>
+
