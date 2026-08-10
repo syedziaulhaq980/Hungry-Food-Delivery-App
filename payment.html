@@ -1,23 +1,29 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
-    <meta charset="UTF-8">
+```
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <title>Hungry - Payment</title>
+<title>Hungry - Payment</title>
 
-    <link rel="stylesheet" href="static/style.css">
+<link rel="stylesheet" href="static/style.css">
+```
 
 </head>
 
-
 <body>
 
+<!-- NAVBAR -->
 
+<div class="navbar">
+
+```
 <div class="logo">
     🍔 Hungry
 </div>
@@ -42,104 +48,120 @@
     </a>
 
 </div>
-
-
-<h1 class="cart-title">
-
-    💳 Payment
-
-</h1>
-
-
-<div class="payment-box">
-
-    <h2>
-        Choose Payment Method
-    </h2>
-
-
-    <form onsubmit="confirmOrder(event)">
-
-
-        <label>
-
-            <input
-                type="radio"
-                name="payment"
-                value="COD"
-                required
-            >
-
-            💵 Cash On Delivery
-
-        </label>
-
-
-        <br><br>
-
-
-        <label>
-
-            <input
-                type="radio"
-                name="payment"
-                value="UPI"
-            >
-
-            📱 UPI Payment
-
-        </label>
-
-
-        <br><br>
-
-
-        <label>
-
-            <input
-                type="radio"
-                name="payment"
-                value="Card"
-            >
-
-            💳 Card Payment
-
-        </label>
-
-
-        <h3 id="payment-total">
-
-            Total Amount : ₹0
-
-        </h3>
-
-
-        <button
-            class="checkout-btn"
-            type="submit"
-        >
-
-            Confirm Order
-
-        </button>
-
-
-    </form>
-
+```
 
 </div>
 
+<h1 class="cart-title">
+    💳 Payment
+</h1>
+
+<div class="payment-box">
+
+```
+<h2>
+    Choose Payment Method
+</h2>
+
+
+<p id="customer-name"></p>
+
+
+<form onsubmit="confirmOrder(event)">
+
+
+    <label>
+
+        <input
+            type="radio"
+            name="payment"
+            value="COD"
+            required
+        >
+
+        💵 Cash On Delivery
+
+    </label>
+
+
+    <label>
+
+        <input
+            type="radio"
+            name="payment"
+            value="UPI"
+        >
+
+        📱 UPI Payment
+
+    </label>
+
+
+    <label>
+
+        <input
+            type="radio"
+            name="payment"
+            value="Card"
+        >
+
+        💳 Card Payment
+
+    </label>
+
+
+    <h3>
+
+        Total Amount :
+
+        <span id="total-amount">
+            ₹0
+        </span>
+
+    </h3>
+
+
+    <button
+        type="submit"
+        class="checkout-btn"
+    >
+        Confirm Order
+    </button>
+
+
+</form>
+```
+
+</div>
 
 <script>
+
+
+/* ========================= */
+/* GET CART */
+/* ========================= */
+
+
+function getCart() {
+
+
+    return JSON.parse(
+        localStorage.getItem("hungryCart")
+    ) || [];
+
+
+}
+
+
+/* ========================= */
+/* CALCULATE TOTAL */
+/* ========================= */
 
 
 function calculateTotal() {
 
 
-    let cart =
-        JSON.parse(
-            localStorage.getItem("hungryCart")
-        ) || [];
+    let cart = getCart();
 
 
     let total = 0;
@@ -147,17 +169,73 @@ function calculateTotal() {
 
     cart.forEach(function(item) {
 
-        total += Number(item.price);
+
+        let price =
+            Number(item.price) || 0;
+
+
+        let quantity =
+            Number(item.quantity) || 1;
+
+
+        total +=
+            price * quantity;
 
     });
 
 
-    document.getElementById(
-        "payment-total"
-    ).innerText =
-        "Total Amount : ₹" + total;
+    let deliveryFee = 40;
+
+
+    return total + deliveryFee;
 
 }
+
+
+/* ========================= */
+/* LOAD CUSTOMER */
+/* ========================= */
+
+
+function loadPaymentData() {
+
+
+    let customer =
+        JSON.parse(
+            localStorage.getItem(
+                "hungryCustomer"
+            )
+        );
+
+
+    if (customer) {
+
+
+        document.getElementById(
+            "customer-name"
+        ).innerText =
+            "Order for " +
+            customer.name;
+
+    }
+
+
+    let total =
+        calculateTotal();
+
+
+    document.getElementById(
+        "total-amount"
+    ).innerText =
+        "₹" + total;
+
+
+}
+
+
+/* ========================= */
+/* CONFIRM ORDER */
+/* ========================= */
 
 
 function confirmOrder(event) {
@@ -166,48 +244,133 @@ function confirmOrder(event) {
     event.preventDefault();
 
 
-    let cart =
-        JSON.parse(
-            localStorage.getItem("hungryCart")
-        ) || [];
+    let selectedPayment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        );
 
 
-    if (cart.length === 0) {
+    if (!selectedPayment) {
 
-        alert("Your cart is empty!");
 
-        window.location.href =
-            "menu.html";
+        alert(
+            "Please select a payment method."
+        );
+
 
         return;
 
     }
 
 
-    let payment =
-        document.querySelector(
-            'input[name="payment"]:checked'
-        ).value;
+    let paymentMethod =
+        selectedPayment.value;
+
+
+    let cart = getCart();
+
+
+    if (cart.length === 0) {
+
+
+        alert(
+            "Your cart is empty! 🛒"
+        );
+
+
+        window.location.href =
+            "menu.html";
+
+
+        return;
+
+    }
+
+
+    let customer =
+        JSON.parse(
+            localStorage.getItem(
+                "hungryCustomer"
+            )
+        ) || {};
+
+
+    let order = {
+
+
+        id:
+            "HUNGRY-" +
+            Date.now(),
+
+
+        customer:
+            customer,
+
+
+        items:
+            cart,
+
+
+        payment:
+            paymentMethod,
+
+
+        total:
+            calculateTotal(),
+
+
+        date:
+            new Date().toLocaleString()
+
+    };
+
+
+    /* SAVE ORDER */
+
+    let orders =
+        JSON.parse(
+            localStorage.getItem(
+                "hungryOrders"
+            )
+        ) || [];
+
+
+    orders.push(order);
 
 
     localStorage.setItem(
-        "hungryPayment",
-        payment
+        "hungryOrders",
+        JSON.stringify(orders)
     );
 
+
+    /* SAVE CURRENT ORDER */
+
+    localStorage.setItem(
+        "hungryCurrentOrder",
+        JSON.stringify(order)
+    );
+
+
+    /* CLEAR CART */
+
+    localStorage.removeItem(
+        "hungryCart"
+    );
+
+
+    /* GO TO SUCCESS PAGE */
 
     window.location.href =
         "order_success.html";
 
-
 }
 
 
-calculateTotal();
+loadPaymentData();
 
 
 </script>
-
 
 </body>
 
