@@ -60,9 +60,7 @@
     🛒 Your Cart
 </h1>
 
-<div id="cart-content">
-
-</div>
+<div id="cart-content"></div>
 
 <script>
 
@@ -120,7 +118,6 @@ function loadCart() {
 
     let total = 0;
 
-
     let itemsHTML = "";
 
 
@@ -162,7 +159,7 @@ function loadCart() {
                         </h2>
 
                         <p>
-                            ₹${price}
+                            ₹${price} per item
                         </p>
 
                     </div>
@@ -173,7 +170,43 @@ function loadCart() {
 
                 <div class="quantity-box">
 
-                    Qty: ${quantity}
+
+                    <button
+                        onclick="decreaseQuantity(${index})"
+                        style="
+                            border:none;
+                            background:transparent;
+                            color:#ff5200;
+                            font-size:20px;
+                            font-weight:bold;
+                            cursor:pointer;
+                            margin-right:12px;
+                        "
+                    >
+                        −
+                    </button>
+
+
+                    <span>
+                        ${quantity}
+                    </span>
+
+
+                    <button
+                        onclick="increaseQuantity(${index})"
+                        style="
+                            border:none;
+                            background:transparent;
+                            color:#ff5200;
+                            font-size:20px;
+                            font-weight:bold;
+                            cursor:pointer;
+                            margin-left:12px;
+                        "
+                    >
+                        +
+                    </button>
+
 
                 </div>
 
@@ -194,6 +227,7 @@ function loadCart() {
                         font-size:20px;
                         cursor:pointer;
                     "
+                    title="Remove item"
                 >
                     ❌
                 </button>
@@ -203,8 +237,13 @@ function loadCart() {
 
         `;
 
-
     });
+
+
+    let deliveryFee = 40;
+
+    let grandTotal =
+        total + deliveryFee;
 
 
     container.innerHTML = `
@@ -216,6 +255,7 @@ function loadCart() {
 
 
             <div class="bill-box">
+
 
                 <h2>
                     🧾 Bill Details
@@ -242,7 +282,7 @@ function loadCart() {
                     </span>
 
                     <span>
-                        ₹40
+                        ₹${deliveryFee}
                     </span>
 
                 </p>
@@ -255,7 +295,7 @@ function loadCart() {
                     </span>
 
                     <span>
-                        ₹${total + 40}
+                        ₹${grandTotal}
                     </span>
 
                 </p>
@@ -284,9 +324,83 @@ function loadCart() {
 
     `;
 
+}
+
+
+/* ========================= */
+/* INCREASE QUANTITY */
+/* ========================= */
+
+function increaseQuantity(index) {
+
+
+    let cart =
+        JSON.parse(
+            localStorage.getItem("hungryCart")
+        ) || [];
+
+
+    cart[index].quantity =
+        (Number(cart[index].quantity) || 1) + 1;
+
+
+    localStorage.setItem(
+        "hungryCart",
+        JSON.stringify(cart)
+    );
+
+
+    loadCart();
 
 }
 
+
+/* ========================= */
+/* DECREASE QUANTITY */
+/* ========================= */
+
+function decreaseQuantity(index) {
+
+
+    let cart =
+        JSON.parse(
+            localStorage.getItem("hungryCart")
+        ) || [];
+
+
+    let quantity =
+        Number(cart[index].quantity) || 1;
+
+
+    if (quantity > 1) {
+
+
+        cart[index].quantity =
+            quantity - 1;
+
+
+    } else {
+
+
+        cart.splice(index, 1);
+
+    }
+
+
+    localStorage.setItem(
+        "hungryCart",
+        JSON.stringify(cart)
+    );
+
+
+    loadCart();
+
+}
+
+
+/* ========================= */
+/* REMOVE ITEM */
+/* ========================= */
 
 function removeItem(index) {
 
