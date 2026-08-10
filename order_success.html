@@ -1,94 +1,180 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 
 <head>
 
-<title>Order Success</title>
+```
+<meta charset="UTF-8">
 
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Hungry - Order Successful</title>
+
+<link rel="stylesheet" href="static/style.css">
+```
 
 </head>
 
-
 <body>
 
+<!-- NAVBAR -->
 
-<div class="success-box">
+<div class="navbar">
+
+```
+<div class="logo">
+    🍔 Hungry
+</div>
 
 
+<div class="nav-links">
+
+    <a href="index.html">
+        🏠 Home
+    </a>
+
+    <a href="stores.html">
+        🍴 Stores
+    </a>
+
+    <a href="menu.html">
+        🍽️ Menu
+    </a>
+
+    <a href="orders.html">
+        📦 My Orders
+    </a>
+
+</div>
+```
+
+</div>
+
+<!-- SUCCESS MESSAGE -->
+
+<div class="success-container">
+
+```
 <h1>
-🎉 Order Placed Successfully!
+    🎉 Order Placed Successfully!
 </h1>
 
 
 <h2>
-Thank you {{order["name"]}} ❤️
-</h2>
-
-<h2>
-Order ID:
-{{order["order_id"]}}
+    Thank you for ordering from Hungry! 🍔
 </h2>
 
 
-<p>
-Your food is being prepared 🍳
+<p id="order-id">
+    Order ID: Loading...
+</p>
+
+
+<p id="order-date">
+    Date: Loading...
+</p>
+
+
+<p id="payment-method">
+    Payment Method: Loading...
+</p>
+
+
+<p id="order-total">
+    Total Amount: Loading...
 </p>
 
 
 <p>
-🚚 Delivery will arrive soon
+    🚴 Your delicious food is on its way!
 </p>
 
 
-<hr>
-
-
-<h3>
-Order Summary
-</h3>
-
-
-{% for item in order["items"] %}
-
-<p>
-{{item["food"]}} × {{item["quantity"]}}
--
-₹{{item["price"] * item["quantity"]}}
-</p>
-
-
-{% endfor %}
-
-
-
-<h2>
-
-Total:
-₹{{order["total"]}}
-
-</h2>
-
-
-
-<p>
-Payment:
-{{order["payment"]}}
-</p>
-
-
-
-<a href="/stores">
-
-🍔 Order More Food
-
+<a
+    href="orders.html"
+    class="explore-btn"
+>
+    📦 View My Orders
 </a>
 
 
+<a
+    href="index.html"
+    class="home-link"
+>
+    🏠 Back Home
+</a>
+```
+
 </div>
 
+<script>
 
+
+/* ========================= */
+/* LOAD CURRENT ORDER */
+/* ========================= */
+
+
+function loadOrder() {
+
+
+    let order =
+        JSON.parse(
+            localStorage.getItem(
+                "hungryCurrentOrder"
+            )
+        );
+
+
+    if (!order) {
+
+
+        document.getElementById(
+            "order-id"
+        ).innerText =
+            "No recent order found.";
+
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "order-id"
+    ).innerText =
+        "Order ID: " + order.id;
+
+
+    document.getElementById(
+        "order-date"
+    ).innerText =
+        "Date: " + order.date;
+
+
+    document.getElementById(
+        "payment-method"
+    ).innerText =
+        "Payment Method: " +
+        order.payment;
+
+
+    document.getElementById(
+        "order-total"
+    ).innerText =
+        "Total Amount: ₹" +
+        order.total;
+
+}
+
+
+loadOrder();
+
+
+</script>
 
 </body>
 
