@@ -247,54 +247,33 @@ to{
 
 
 
-.store-image{
-
-
-    width:100%;
-
-
-    height:140px;
-
-
-    object-fit:cover;
-
-
+.store-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
 }
 
 
 
 
-.store-card h2{
-
-
-    color:#ff5200;
-
-
-    font-size:20px;
-
-
-    margin:15px;
-
-
+.store-card h2 {
+    color: #ff5200;
+    font-size: 22px;
+    margin: 15px 10px 8px;
 }
 
 
 
 
-.store-card p{
-
-
-    font-size:14px;
-
-
-    margin:8px;
-
-
-    color:#333;
-
-
+.store-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    text-align: center;
+    padding-bottom: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    transition: 0.3s;
 }
-
 
 
 
@@ -1123,17 +1102,21 @@ to{
 
 
 
-@media(max-width:900px){
+@media(max-width:900px) {
 
-
-.store-container{
-
-
-    grid-template-columns:repeat(2,1fr);
-
+    .store-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
 }
 
+@media(max-width:600px) {
+
+    .store-container {
+        grid-template-columns: 1fr;
+    }
+
+}
 
 
 .restaurant-banner{
@@ -1154,7 +1137,7 @@ to{
 }
 
 
-}
+
 
 
 
@@ -1174,12 +1157,13 @@ to{
 
 
 
-.store-container{
-
-
-    grid-template-columns:1fr;
-
-
+.store-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    width: 90%;
+    max-width: 1300px;
+    margin: 40px auto;
 }
 
 

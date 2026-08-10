@@ -64,37 +64,10 @@
     Choose what you want to order
 </p>
 
-<!-- SEARCH -->
-
-<form
-    class="search-form"
-    onsubmit="searchStores(event)"
->
+<div class="store-container">
 
 ```
-<input
-    type="text"
-    id="searchInput"
-    placeholder="🔍 Search Store..."
->
-
-<button type="submit">
-    Search
-</button>
-```
-
-</form>
-
-<!-- STORES -->
-
-<div
-    class="store-container"
-    id="stores-container"
->
-
-```
-<!-- FOOD STORES -->
-
+<!-- RESTAURANT 1 -->
 
 <div class="store-card">
 
@@ -109,7 +82,7 @@
     </h2>
 
     <p>
-        🍛 Delicious Biryani & Indian Food
+        🍛 Delicious Indian Biryani
     </p>
 
     <span class="rating">
@@ -128,6 +101,8 @@
 </div>
 
 
+<!-- RESTAURANT 2 -->
+
 <div class="store-card">
 
     <img
@@ -141,7 +116,7 @@
     </h2>
 
     <p>
-        🍽️ Multi-Cuisine Restaurant
+        🍽️ Delicious Multi-Cuisine Food
     </p>
 
     <span class="rating">
@@ -159,6 +134,8 @@
 
 </div>
 
+
+<!-- RESTAURANT 3 -->
 
 <div class="store-card">
 
@@ -194,11 +171,10 @@
 
 <!-- GROCERY -->
 
-
 <div class="store-card">
 
     <img
-        src="static/images/grocery.jpg"
+        src="static/images/grocery_store.jpg"
         class="store-image"
         alt="Hungry Grocery"
     >
@@ -208,7 +184,7 @@
     </h2>
 
     <p>
-        🛒 Groceries & Daily Essentials
+        🛒 Fresh Grocery & Essentials
     </p>
 
     <span class="rating">
@@ -218,7 +194,7 @@
     <br>
 
     <a
-        href="menu.html"
+        href="grocery_menu.html"
         class="btn"
     >
         View Products
@@ -229,11 +205,10 @@
 
 <!-- UTENSILS -->
 
-
 <div class="store-card">
 
     <img
-        src="static/images/utensils.jpg"
+        src="static/images/utensils_store.jpg"
         class="store-image"
         alt="Hungry Utensils"
     >
@@ -247,13 +222,13 @@
     </p>
 
     <span class="rating">
-        ⭐ 4.2
+        ⭐ 4.5
     </span>
 
     <br>
 
     <a
-        href="menu.html"
+        href="utensils_menu.html"
         class="btn"
     >
         View Products
@@ -268,7 +243,7 @@
 
 <a
 href="index.html"
-class="continue-btn"
+class="home-link"
 
 >
 
@@ -277,6 +252,7 @@ class="continue-btn"
 ```
 
 </a>
+
 
 <script>
 
