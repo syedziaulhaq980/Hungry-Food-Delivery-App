@@ -39,7 +39,7 @@
         🍴 Stores
     </a>
 
-    <a href="menu.html">
+    <a href="food_menu.html">
         🍽️ Menu
     </a>
 
@@ -67,13 +67,14 @@
 
 <div class="checkout-form">
 
-
     <h2>
         👤 Customer Details
     </h2>
 
 
-    <form onsubmit="continueToPayment(event)">
+    <form
+        onsubmit="continueToPayment(event)"
+    >
 
 
         <label for="name">
@@ -96,6 +97,8 @@
             type="tel"
             id="phone"
             placeholder="Enter phone number"
+            pattern="[0-9]{10}"
+            maxlength="10"
             required
         >
 
@@ -133,7 +136,6 @@
 
     </form>
 
-
 </div>
 
 
@@ -141,14 +143,12 @@
 
 <div class="bill-box">
 
-
     <h2>
         🧾 Order Summary
     </h2>
 
 
     <div id="order-items">
-
     </div>
 
 
@@ -190,7 +190,6 @@
 
     </p>
 
-
 </div>
 ```
 
@@ -198,85 +197,56 @@
 
 <script>
 
-
-/* ========================= */
-/* LOAD CART */
-/* ========================= */
-
-
 function getCart() {
-
 
     return JSON.parse(
         localStorage.getItem("hungryCart")
     ) || [];
 
-
 }
 
 
-/* ========================= */
-/* DISPLAY ORDER SUMMARY */
-/* ========================= */
+function displayOrderSummary() {
 
+    const cart = getCart();
 
-function loadSummary() {
+    const orderItems =
+        document.getElementById("order-items");
 
+    const itemTotalElement =
+        document.getElementById("item-total");
 
-    let cart = getCart();
-
-
-    let itemsContainer =
-        document.getElementById(
-            "order-items"
-        );
-
-
-    let itemTotal = 0;
+    const grandTotalElement =
+        document.getElementById("grand-total");
 
 
     if (cart.length === 0) {
 
-
-        itemsContainer.innerHTML = `
-
-            <p>
-                Your cart is empty.
-            </p>
-
+        orderItems.innerHTML = `
+            <p>Your cart is empty 🛒</p>
         `;
 
-
-        document.getElementById(
-            "item-total"
-        ).innerText = "₹0";
-
-
-        document.getElementById(
-            "grand-total"
-        ).innerText = "₹0";
-
+        itemTotalElement.innerText = "₹0";
+        grandTotalElement.innerText = "₹40";
 
         return;
-
     }
 
+
+    let itemTotal = 0;
 
     let html = "";
 
 
     cart.forEach(function(item) {
 
-
-        let price =
+        const price =
             Number(item.price) || 0;
 
-
-        let quantity =
+        const quantity =
             Number(item.quantity) || 1;
 
-
-        let total =
+        const total =
             price * quantity;
 
 
@@ -302,96 +272,73 @@ function loadSummary() {
     });
 
 
-    let deliveryFee = 40;
+    const deliveryFee = 40;
 
-
-    let grandTotal =
+    const grandTotal =
         itemTotal + deliveryFee;
 
 
-    itemsContainer.innerHTML = html;
+    orderItems.innerHTML = html;
 
-
-    document.getElementById(
-        "item-total"
-    ).innerText =
+    itemTotalElement.innerText =
         "₹" + itemTotal;
 
-
-    document.getElementById(
-        "grand-total"
-    ).innerText =
+    grandTotalElement.innerText =
         "₹" + grandTotal;
 
 }
 
 
-/* ========================= */
-/* CONTINUE TO PAYMENT */
-/* ========================= */
-
-
 function continueToPayment(event) {
-
 
     event.preventDefault();
 
 
-    let cart = getCart();
+    const cart = getCart();
 
 
     if (cart.length === 0) {
-
 
         alert(
             "Your cart is empty! 🛒"
         );
 
-
         window.location.href =
-            "menu.html";
-
+            "stores.html";
 
         return;
 
     }
 
 
-    let customer = {
-
+    const customer = {
 
         name:
-            document.getElementById(
-                "name"
-            ).value,
-
+            document.getElementById("name")
+            .value
+            .trim(),
 
         phone:
-            document.getElementById(
-                "phone"
-            ).value,
-
+            document.getElementById("phone")
+            .value
+            .trim(),
 
         address:
-            document.getElementById(
-                "address"
-            ).value,
-
+            document.getElementById("address")
+            .value
+            .trim(),
 
         city:
-            document.getElementById(
-                "city"
-            ).value
+            document.getElementById("city")
+            .value
+            .trim()
 
     };
 
 
     localStorage.setItem(
-
         "hungryCustomer",
-
         JSON.stringify(customer)
-
     );
 
 
@@ -401,8 +348,7 @@ function continueToPayment(event) {
 }
 
 
-loadSummary();
-
+displayOrderSummary();
 
 </script>
 
