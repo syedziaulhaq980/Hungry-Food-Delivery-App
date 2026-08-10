@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Hungry - Payment</title>
+
+    <link rel="stylesheet" href="static/style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="logo">
+    🍔 Hungry
+</div>
+
+
+<div class="nav-links">
+
+    <a href="index.html">
+        🏠 Home
+    </a>
+
+    <a href="stores.html">
+        🍴 Stores
+    </a>
+
+    <a href="menu.html">
+        🍽️ Menu
+    </a>
+
+    <a href="cart.html">
+        🛒 Cart
+    </a>
+
+</div>
+
+
+<h1 class="cart-title">
+
+    💳 Payment
+
+</h1>
+
+
+<div class="payment-box">
+
+    <h2>
+        Choose Payment Method
+    </h2>
+
+
+    <form onsubmit="confirmOrder(event)">
+
+
+        <label>
+
+            <input
+                type="radio"
+                name="payment"
+                value="COD"
+                required
+            >
+
+            💵 Cash On Delivery
+
+        </label>
+
+
+        <br><br>
+
+
+        <label>
+
+            <input
+                type="radio"
+                name="payment"
+                value="UPI"
+            >
+
+            📱 UPI Payment
+
+        </label>
+
+
+        <br><br>
+
+
+        <label>
+
+            <input
+                type="radio"
+                name="payment"
+                value="Card"
+            >
+
+            💳 Card Payment
+
+        </label>
+
+
+        <h3 id="payment-total">
+
+            Total Amount : ₹0
+
+        </h3>
+
+
+        <button
+            class="checkout-btn"
+            type="submit"
+        >
+
+            Confirm Order
+
+        </button>
+
+
+    </form>
+
+
+</div>
+
+
+<script>
+
+
+function calculateTotal() {
+
+
+    let cart =
+        JSON.parse(
+            localStorage.getItem("hungryCart")
+        ) || [];
+
+
+    let total = 0;
+
+
+    cart.forEach(function(item) {
+
+        total += Number(item.price);
+
+    });
+
+
+    document.getElementById(
+        "payment-total"
+    ).innerText =
+        "Total Amount : ₹" + total;
+
+}
+
+
+function confirmOrder(event) {
+
+
+    event.preventDefault();
+
+
+    let cart =
+        JSON.parse(
+            localStorage.getItem("hungryCart")
+        ) || [];
+
+
+    if (cart.length === 0) {
+
+        alert("Your cart is empty!");
+
+        window.location.href =
+            "menu.html";
+
+        return;
+
+    }
+
+
+    let payment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        ).value;
+
+
+    localStorage.setItem(
+        "hungryPayment",
+        payment
+    );
+
+
+    window.location.href =
+        "order_success.html";
+
+
+}
+
+
+calculateTotal();
+
+
+</script>
+
+
+</body>
+
+</html>
