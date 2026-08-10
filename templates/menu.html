@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>{{store.name}} Menu</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+
+
+</head>
+
+
+<body>
+    
+<nav class="navbar">
+
+    <div class="logo">
+        🍔 Hungry
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="/stores"  clas="active">
+            🍴 Stores
+        </a>
+        
+        <a href="/search_food">
+        🔍 Search Food
+        
+        <a href="/orders">
+              📦 My Orders
+        </a>
+
+        <a href="/cart">
+                   🛒 Cart
+
+                  {% if session.get("cart_count",0) > 0 %}
+                   <span class="cart-count">
+                   {{session.get("cart_count")}}
+                    </span>
+                   {% endif %}
+
+                   </a>
+
+            </div>
+
+</nav>
+
+
+<div class = "restaurant-banner">
+
+<div class="restaurant-image-box">
+
+<img
+src="{{ url_for('static', filename='images/' + store.image) }}"
+class="restaurant-image"
+alt="{{store.name}}"
+>
+
+</div>
+
+<div class="restaurant-details">
+
+
+<h1>
+🍽️ {{store.name}}
+</h1>
+
+
+<p>
+⭐ {{store.rating}} Rating
+</p>
+
+
+<p>
+🚚 {{store.delivery_time}}
+</p>
+
+
+<p>
+💰 Delivery Fee: ₹{{store.delivery_fee}}
+</p>
+
+
+<p>
+🥗 {{store.food_type}}
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="menu-container">
+
+
+
+{% for category, items in store.menu.items() %}
+
+
+
+<div class="category-card">
+
+
+<h2>
+{{category}}
+</h2>
+
+
+
+{% for food, details in items.items() %}
+
+
+
+<div class="food-card">
+
+
+<div class="food-info">
+
+<h3>
+{{food}}
+</h3>
+
+
+<p class="price">
+₹{{details.price}}
+</p>
+
+
+<p class="food-description">
+{{details.description}}
+</p>
+
+
+</div>
+
+
+
+
+<div class="food-right">
+
+
+{% if details is mapping %}
+
+<img
+src="{{ url_for('static', filename='images/' + details.image) }}"
+class="food-item-image"
+alt="{{food}}"
+>
+
+{% endif %}
+
+
+
+
+<form action="/add_to_cart" method="POST">
+
+
+<input type="hidden" name="food" value="{{food}}">
+
+<input type="hidden" name="price" value="{{details.price}}">
+
+<input type="hidden" name="store_id" value="{{store.store_id}}">
+
+
+<input 
+type="hidden"
+name="quantity"
+value="1"
+>
+
+
+
+<button class="add-btn">
+
++ Add
+
+</button>
+
+
+</form>
+
+
+</div>
+
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+
+
+<div class="bottom-buttons">
+
+
+<a class="view-cart-btn" href="/cart">
+    🛒 View Cart
+</a>
+
+
+
+<a class="home-link" href="/stores">
+
+← Back To Stores
+
+</a>
+
+
+</div>
+
+
+
+</body>
+
+</html>

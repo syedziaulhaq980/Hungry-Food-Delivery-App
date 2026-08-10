@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>My Orders</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<h1 class="cart-title">
+📦 My Orders
+</h1>
+<nav class="navbar">
+
+    <div class="logo">
+        🍔 Hungry
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/stores">
+            🍴 Stores
+        </a>
+
+        <a href="/orders" class="active">
+            📦 My Orders
+        </a>
+
+        <a href="/cart">
+            🛒 Cart
+
+            {% if session.get("cart_count",0) > 0 %}
+            <span class="cart-count">
+                {{session.get("cart_count")}}
+            </span>
+            {% endif %}
+
+        </a>
+
+    </div>
+
+</nav>
+{% if orders %}
+
+<div class="orders-container">
+
+{% for order in orders %}
+
+<div class="order-card">
+
+<h2>
+Order ID: {{order["order_id"]}}
+</h2>
+
+<p>
+👤 {{order["name"]}}
+</p>
+
+<p>
+💳 {{order["payment"]}}
+</p>
+
+<hr>
+
+<h3>Items</h3>
+
+{% for item in order["items"] %}
+
+<p>
+
+{{item["food"]}}
+
+×
+
+{{item["quantity"]}}
+
+-
+
+₹{{item["price"] * item["quantity"]}}
+
+</p>
+
+{% endfor %}
+
+<hr>
+
+<h2>
+
+Total : ₹{{order["total"]}}
+
+</h2>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% else %}
+
+<div class="empty-cart">
+
+<h2>
+
+No Orders Yet 📦
+
+</h2>
+
+<p>
+
+Start ordering delicious food.
+
+</p>
+
+<a href="/stores">
+
+Order Now
+
+</a>
+
+</div>
+
+{% endif %}
+
+</body>
+
+</html>

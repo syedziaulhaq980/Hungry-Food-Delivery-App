@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stores</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+<nav class="nav-links">
+
+    <div class="logo">
+        🍔 Hungry
+    </div>
+
+    <a href="/">
+        🏠 Home
+    </a>
+
+    <a href="/stores" class="active">
+        🍴 Stores
+    </a>
+
+    </a>
+
+    <a href="/cart">
+        🛒 Cart
+    </a>
+
+    {% if session.get("cart_count",0) > 0 %}
+            <span class="cart-count">
+                {{session.get("cart_count")}}
+            </span>
+            {% endif %}
+
+    <a href="/orders">
+        📦 My Orders
+    </a>
+
+</nav>
+
+<h1 class="page-title">
+    🍴 Explore Stores
+</h1>
+
+
+<p class="subtitle">
+    Choose your favourite restaurant and order delicious food
+</p>
+
+<form action="/stores" method="GET" class="search-form">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="🔍 Search Restaurant..."
+        value="{{ search }}">
+
+    <button type="submit">
+        Search
+    </button>
+     
+    
+</form>
+
+
+<div class="store-container">
+
+
+{% for store in stores %}
+
+
+<div class="store-card">
+
+
+<img
+src="{{ url_for('static', filename='images/' + store.image) }}"
+class="store-image"
+alt="{{ store.name }}"
+>
+
+
+
+<h2>
+{{ store.name }}
+</h2>
+
+
+<div class="rating">
+
+⭐ {{ store.rating }}
+
+</div>
+
+
+
+<p>
+🚚 {{ store.delivery_time }}
+</p>
+
+
+
+<p>
+🍽️ {{ store.food_type }}
+</p>
+
+
+
+<a class="btn" href="/menu/{{ store.store_id }}">
+
+View Menu
+
+</a>
+
+
+</div>
+
+
+{% endfor %}
+
+
+</div>
+
+
+
+<a class="home-link" href="/">
+
+← Back Home
+
+</a>
+
+
+
+</body>
+
+</html>

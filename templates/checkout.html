@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Checkout</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body class="cart-page">
+
+
+<h1 class="cart-title">
+    🏠 Checkout
+</h1>
+
+
+
+<div class="checkout-container">
+
+
+
+<div class="checkout-form">
+
+
+<h2>
+Delivery Details
+</h2>
+
+
+<form action="/place_order" method="POST">
+
+
+<label>
+Full Name
+</label>
+
+<input 
+type="text"
+name="name"
+placeholder="Enter your name"
+required
+>
+
+
+
+<label>
+Phone Number
+</label>
+
+
+<input
+type="text"
+name="phone"
+placeholder="Enter phone number"
+required
+>
+
+
+
+<label>
+Address
+</label>
+
+
+<textarea
+name="address"
+placeholder="Enter delivery address"
+required
+></textarea>
+
+
+
+<button class="checkout-btn">
+
+Place Order
+
+</button>
+
+
+
+</form>
+
+
+</div>
+
+
+
+
+
+<div class="bill-box">
+
+
+<h2>
+🧾 Order Summary
+</h2>
+
+
+{% for item in items %}
+
+
+<p>
+
+<span>
+{{item.food}} x {{item.quantity}}
+</span>
+
+
+<span>
+₹{{item.price * item.quantity}}
+</span>
+
+
+</p>
+
+
+{% endfor %}
+
+
+
+<hr>
+
+
+
+<p class="grand-total">
+
+
+<span>
+Total
+</span>
+
+
+<span>
+₹{{grand_total}}
+</span>
+
+
+</p>
+
+
+
+</div>
+
+
+
+</div>
+
+
+</body>
+
+</html>

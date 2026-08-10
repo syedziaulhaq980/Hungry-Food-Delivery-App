@@ -1,0 +1,1924 @@
+/* =========================
+        GLOBAL STYLE
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+body{
+
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:#f5f5f5;
+
+}
+
+
+/* =========================
+        HOME PAGE
+========================= */
+
+
+.home{
+
+    height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    color:white;
+
+
+    background:
+
+    linear-gradient(
+        rgba(0,0,0,0.55),
+        rgba(0,0,0,0.55)
+    ),
+
+    url("https://images.unsplash.com/photo-1504674900247-0877df9cc836");
+
+
+    background-size:cover;
+
+    background-position:center;
+
+}
+
+
+
+
+.home h1{
+
+    font-size:90px;
+
+    font-weight:900;
+
+    letter-spacing:3px;
+
+    animation:zoom 1s ease;
+
+}
+
+
+
+
+.home p{
+
+    font-size:28px;
+
+    margin:25px 0 40px;
+
+}
+
+
+
+
+@keyframes zoom{
+
+from{
+
+    transform:scale(0.7);
+
+    opacity:0;
+
+}
+
+
+to{
+
+    transform:scale(1);
+
+    opacity:1;
+
+}
+
+}
+
+
+
+/* =========================
+        HOME BUTTONS
+========================= */
+
+
+.explore-btn,
+.cart-btn-home{
+
+
+    display:inline-block;
+
+    padding:18px 45px;
+
+    border-radius:50px;
+
+    text-decoration:none;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    margin:10px;
+
+    transition:0.3s;
+
+}
+
+
+
+.explore-btn{
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #ff5200,
+        #ff914d
+    );
+
+
+    color:white;
+
+}
+
+
+
+.cart-btn-home{
+
+    background:white;
+
+    color:#ff5200;
+
+    border:3px solid #ff5200;
+
+}
+
+
+
+.explore-btn:hover,
+.cart-btn-home:hover{
+
+    transform:translateY(-5px);
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================
+        STORE PAGE
+========================= */
+
+
+.store-container{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(5,1fr);
+
+
+
+    gap:20px;
+
+
+    width:95%;
+
+
+    margin:30px auto;
+
+
+}
+
+
+
+
+.store-card{
+
+
+    background:white;
+
+
+    border-radius:20px;
+
+
+    overflow:hidden;
+
+
+    text-align:center;
+
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,0.15);
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.store-card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+
+
+
+.store-image{
+
+
+    width:100%;
+
+
+    height:140px;
+
+
+    object-fit:cover;
+
+
+}
+
+
+
+
+.store-card h2{
+
+
+    color:#ff5200;
+
+
+    font-size:20px;
+
+
+    margin:15px;
+
+
+}
+
+
+
+
+.store-card p{
+
+
+    font-size:14px;
+
+
+    margin:8px;
+
+
+    color:#333;
+
+
+}
+
+
+
+
+
+.rating{
+
+
+    display:inline-block;
+
+
+    background:#28a745;
+
+
+    color:white;
+
+
+    padding:8px 18px;
+
+
+    border-radius:20px;
+
+
+    font-weight:bold;
+
+
+}
+
+
+
+.store-card .btn{
+
+
+    display:inline-block;
+
+
+    margin:15px;
+
+
+    padding:10px 20px;
+
+
+    background:#ff5200;
+
+
+    color:white;
+
+
+    border-radius:25px;
+
+
+    text-decoration:none;
+
+
+}
+
+
+
+/* PAGE TITLE */
+
+
+.page-title{
+
+
+    text-align:center;
+
+
+    margin-top:50px;
+
+
+    font-size:50px;
+
+
+    color:#ff5200;
+
+
+}
+
+
+
+.subtitle{
+
+
+    text-align:center;
+
+
+    color:#555;
+
+
+    font-size:22px;
+
+
+}
+
+/* =========================
+        MENU PAGE
+========================= */
+
+
+/* RESTAURANT HEADER */
+
+
+.restaurant-banner{
+
+
+    width:85%;
+
+    margin:30px auto;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:20px;
+
+    display:flex;
+
+    gap:25px;
+
+    align-items:center;
+
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,0.12);
+
+}
+
+
+
+.restaurant-image{
+
+
+    width:180px;
+
+
+    height:140px;
+
+
+    object-fit:cover;
+
+
+    border-radius:20px;
+
+
+}
+
+
+
+.restaurant-details h1{
+
+
+    color:#ff5200;
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+.restaurant-details p{
+
+
+    font-size:18px;
+
+    margin:8px;
+
+
+}
+
+
+
+
+
+
+/* =========================
+      ZOMATO STYLE MENU
+========================= */
+
+
+
+.menu-container{
+
+
+    width:70%;
+
+
+    margin:40px auto;
+
+
+}
+
+
+
+
+
+.category-card{
+
+
+    background:white;
+
+
+    border-radius:20px;
+
+
+    padding:25px;
+
+
+    margin-bottom:25px;
+
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,0.10);
+
+
+}
+
+
+
+
+.category-card h2{
+
+
+    color:#ff5200;
+
+
+    font-size:28px;
+
+
+    border-bottom:1px solid #ddd;
+
+
+    padding-bottom:15px;
+
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+
+
+
+
+/* FOOD ITEM */
+
+
+.food-card{
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    align-items:center;
+
+
+    padding:18px 0;
+
+
+    border-bottom:1px solid #eee;
+
+
+}
+
+
+
+
+
+.food-info{
+
+
+    flex:1;
+
+
+}
+
+
+
+
+
+.food-info h3{
+
+
+    font-size:22px;
+
+
+    color:#222;
+
+
+    margin-bottom:8px;
+
+
+}
+
+
+
+
+
+.price{
+
+
+    color:#ff5200;
+
+
+    font-size:18px;
+
+
+    font-weight:bold;
+
+
+}
+
+
+
+
+
+
+.food-description{
+
+
+    color:#777;
+
+
+    font-size:14px;
+
+
+    margin-top:8px;
+
+
+}
+
+
+
+
+
+/* RIGHT SIDE IMAGE + BUTTON */
+
+
+.food-right{
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
+
+
+    gap:10px;
+
+
+}
+
+
+
+
+
+
+.food-image-box{
+
+
+    width:90px;
+
+
+    height:90px;
+
+
+    overflow:hidden;
+
+
+    border-radius:12px;
+
+
+}
+
+
+
+
+
+.food-item-image{
+
+
+    width:90px;
+
+
+    height:90px;
+
+
+    object-fit:cover;
+
+
+    border-radius:12px;
+
+
+}
+
+
+
+
+
+
+/* ADD BUTTON */
+
+
+.add-btn{
+
+
+    background:white;
+
+
+    color:#ff5200;
+
+
+    border:1px solid #ff5200;
+
+
+    padding:8px 25px;
+
+
+    border-radius:8px;
+
+
+    font-size:15px;
+
+
+    font-weight:bold;
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+
+
+.add-btn:hover{
+
+
+    background:#ff5200;
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+/* =========================
+        CART PAGE
+========================= */
+
+
+
+.cart-container{
+
+
+    width:80%;
+
+
+    max-width:1100px;
+
+
+    margin:40px auto;
+
+
+}
+
+
+
+
+.cart-title{
+
+
+    text-align:center;
+
+
+    margin-top:40px;
+
+
+    font-size:45px;
+
+
+    color:#ff5200;
+
+
+}
+
+
+
+
+
+
+.cart-card{
+
+
+    background:white;
+
+
+    padding:25px;
+
+
+    margin:20px 0;
+
+
+    border-radius:25px;
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    align-items:center;
+
+
+    box-shadow:
+
+
+    0 10px 25px rgba(0,0,0,0.12);
+
+
+}
+
+
+
+
+
+
+.cart-food-info{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:20px;
+
+
+}
+
+
+
+
+
+.food-icon{
+
+
+    width:60px;
+
+
+    height:60px;
+
+
+    border-radius:50%;
+
+
+    background:#fff3ed;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    font-size:30px;
+
+
+}
+
+
+
+
+
+
+.quantity-box{
+
+
+    background:#fff3ed;
+
+
+    color:#ff5200;
+
+
+    padding:10px 20px;
+
+
+    border-radius:30px;
+
+
+    font-weight:bold;
+
+
+}
+
+
+
+
+
+.item-total{
+
+
+    font-size:24px;
+
+
+    font-weight:bold;
+
+
+    color:#ff5200;
+
+
+}
+
+
+
+
+
+
+/* BILL BOX */
+
+
+.bill-box{
+
+
+    background:white;
+
+
+    padding:30px;
+
+
+    border-radius:25px;
+
+
+    box-shadow:
+
+
+    0 10px 25px rgba(0,0,0,0.12);
+
+
+}
+
+
+
+
+
+.bill-box h2{
+
+
+    color:#ff5200;
+
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+
+
+.bill-box p{
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    margin:15px 0;
+
+
+    font-size:18px;
+
+
+}
+
+
+
+
+.grand-total{
+
+
+    color:#ff5200;
+
+
+    font-size:25px !important;
+
+
+    font-weight:bold;
+
+
+}
+
+
+
+
+
+
+/* CHECKOUT BUTTON */
+
+
+.checkout-btn{
+
+
+    display:block;
+
+
+    text-align:center;
+
+
+    margin-top:25px;
+
+
+    padding:16px;
+
+
+    border-radius:35px;
+
+
+    text-decoration:none;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #ff5200,
+        #ff914d
+    );
+
+
+    color:white;
+
+
+    font-size:20px;
+
+
+    font-weight:bold;
+
+
+}
+
+
+
+
+
+
+.continue-btn{
+
+
+    display:block;
+
+
+    width:250px;
+
+
+    margin:30px auto;
+
+
+    padding:15px;
+
+
+    text-align:center;
+
+
+    border-radius:30px;
+
+
+    background:#333;
+
+
+    color:white;
+
+
+    text-decoration:none;
+
+
+    font-weight:bold;
+
+
+}
+
+
+
+
+
+.continue-btn:hover{
+
+
+    background:#ff5200;
+
+
+}
+
+
+
+
+
+
+/* =========================
+        RESPONSIVE
+========================= */
+
+
+
+@media(max-width:900px){
+
+
+.store-container{
+
+
+    grid-template-columns:repeat(2,1fr);
+
+
+}
+
+
+
+.restaurant-banner{
+
+
+    flex-direction:column;
+
+
+}
+
+
+.menu-container{
+
+
+    width:90%;
+
+
+}
+
+
+}
+
+
+
+
+
+@media(max-width:600px){
+
+
+
+.home h1{
+
+
+    font-size:55px;
+
+
+}
+
+
+
+.store-container{
+
+
+    grid-template-columns:1fr;
+
+
+}
+
+
+
+.food-card{
+
+
+    flex-direction:column;
+
+
+    align-items:flex-start;
+
+
+}
+
+
+.food-right{
+
+
+    margin-top:15px;
+
+
+}
+
+
+}
+/* =========================
+   MENU BOTTOM BUTTONS
+========================= */
+
+
+.bottom-buttons{
+
+    width:85%;
+
+    margin:40px auto;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:25px;
+
+}
+
+
+
+/* VIEW CART BUTTON */
+
+.view-cart-btn{
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff5200,
+        #ff914d
+    );
+
+    color:white;
+
+    padding:15px 35px;
+
+    border-radius:30px;
+
+    text-decoration:none;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    transition:0.3s;
+
+    box-shadow:
+    0 10px 20px rgba(255,82,0,0.3);
+
+}
+
+
+.view-cart-btn:hover{
+
+    transform:translateY(-5px);
+
+    background:#e04800;
+
+}
+
+
+
+
+/* BACK STORES BUTTON */
+
+
+.home-link{
+
+    background:#333;
+
+    color:white;
+
+    padding:15px 35px;
+
+    border-radius:30px;
+
+    text-decoration:none;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    transition:0.3s;
+
+}
+
+
+
+.home-link:hover{
+
+    background:#ff5200;
+
+    transform:translateY(-5px);
+
+}
+
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+.bottom-buttons{
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+
+}
+.continue-btn{
+
+    display:block;
+
+    width:250px;
+
+    margin:30px auto;
+
+    text-align:center;
+
+    background:#333;
+
+    color:white;
+
+    padding:15px;
+
+    border-radius:30px;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+}
+
+
+.continue-btn:hover{
+
+    background:#ff5200;
+
+    transform:translateY(-5px);
+
+}
+
+/* =========================
+        EMPTY CART
+========================= */
+
+
+.empty-cart{
+
+    width:500px;
+
+    margin:100px auto;
+
+    background:white;
+
+    padding:50px;
+
+    text-align:center;
+
+    border-radius:25px;
+
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.15);
+
+}
+
+
+
+.empty-cart-icon{
+
+    font-size:70px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.empty-cart h2{
+
+    color:#ff5200;
+
+    font-size:35px;
+
+}
+
+
+
+.empty-cart p{
+
+    color:#777;
+
+    font-size:18px;
+
+    margin:20px 0;
+
+}
+
+
+
+.empty-cart a{
+
+
+    display:inline-block;
+
+    background:#ff5200;
+
+    color:white;
+
+    padding:15px 35px;
+
+    border-radius:30px;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    transition:0.3s;
+
+}
+
+
+
+.empty-cart a:hover{
+
+    transform:translateY(-5px);
+
+    background:#e04800;
+
+}
+.warning-box{
+
+    width:500px;
+
+    margin:100px auto;
+
+    background:white;
+
+    padding:40px;
+
+    text-align:center;
+
+    border-radius:25px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.15);
+
+}
+
+
+.warning-box h1{
+
+    color:#ff5200;
+
+}
+
+
+.warning-box p{
+
+    color:#555;
+
+    margin:15px;
+
+}
+
+
+.warning-box a{
+
+    display:inline-block;
+
+    margin:10px;
+
+    padding:15px 25px;
+
+    background:#ff5200;
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:30px;
+
+}
+
+/* =========================
+       CHECKOUT PAGE
+========================= */
+
+
+.checkout-container{
+
+    width:80%;
+
+    margin:40px auto;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:30px;
+
+}
+
+
+
+.checkout-form{
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:25px;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,0.12);
+
+}
+
+
+
+.checkout-form h2{
+
+    color:#ff5200;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.checkout-form label{
+
+    display:block;
+
+    margin-top:15px;
+
+    font-weight:bold;
+
+}
+
+
+
+.checkout-form input,
+.checkout-form textarea{
+
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:8px;
+
+    border-radius:12px;
+
+    border:1px solid #ccc;
+
+    font-size:16px;
+
+}
+
+
+
+.checkout-form textarea{
+
+    height:120px;
+
+    resize:none;
+
+}
+
+
+
+@media(max-width:800px){
+
+.checkout-container{
+
+    grid-template-columns:1fr;
+
+}
+
+}
+.payment-box{
+
+    width:500px;
+
+    margin:50px auto;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.15);
+
+}
+
+
+
+.payment-box h2{
+
+    color:#ff5200;
+
+    margin-bottom:30px;
+
+}
+
+
+
+.payment-box label{
+
+    font-size:20px;
+
+    display:block;
+
+    margin:15px;
+
+}
+
+
+.success-box{
+
+    width:500px;
+
+    margin:100px auto;
+
+    background:white;
+
+    padding:50px;
+
+    text-align:center;
+
+    border-radius:25px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.15);
+
+}
+
+
+.success-box h1{
+
+    color:#28a745;
+
+    margin-bottom:20px;
+
+}
+
+
+.success-box p{
+
+    font-size:18px;
+
+    margin:15px;
+
+}
+
+
+.success-box a{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    padding:15px 35px;
+
+    background:#ff5200;
+
+    color:white;
+
+    border-radius:30px;
+
+    text-decoration:none;
+
+}
+
+
+.orders-container{
+
+    width:80%;
+
+    margin:40px auto;
+
+}
+
+.order-card{
+
+    background:white;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    border-radius:20px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,0.1);
+
+}
+
+.order-card h2{
+
+    color:#ff5200;
+
+}
+
+.order-card h3{
+
+    margin-top:20px;
+
+}
+/* =========================
+        FINAL NAVBAR
+========================= */
+
+.navbar{
+
+    width:90%;
+    margin:20px auto;
+
+    background:white;
+
+    padding:15px 30px;
+
+    border-radius:20px;
+
+    display:flex;
+
+    justify-content: space-between;
+
+    align-items:right;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+
+}
+
+
+/* Hungry Logo */
+
+.logo{
+
+    font-size:32px;
+
+    font-weight:900;
+
+    color:#ff5200;
+
+}
+
+
+
+/* Right side menu */
+
+.nav-links{
+
+    display:flex;
+
+    gap:15px;
+
+    align-items:center;
+
+}
+
+
+
+/* Links */
+
+.nav-links a{
+
+    text-decoration:none;
+
+    color:#333;
+
+    background:#fff3ed;
+
+    padding:12px 20px;
+
+    border-radius:30px;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    transition:0.3s;
+
+}
+
+
+
+.nav-links a:hover{
+
+    background:#ff5200;
+
+    color:white;
+
+    transform:translateY(-3px);
+
+}
+
+
+
+/* Active link */
+
+.nav-links a.active{
+
+    background:#ff5200;
+
+    color:white;
+
+}
+
+
+
+/* Cart number */
+
+.cart-count{
+
+    background:#ff5200;
+
+    color:white;
+
+    padding:3px 8px;
+
+    border-radius:50%;
+
+    font-size:13px;
+
+}
+/* =========================
+        SEARCH BAR
+========================= */
+
+
+.search-form {
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin:30px auto;
+
+}
+
+
+
+.search-form input {
+
+
+    width:350px;
+
+    padding:12px 18px;
+
+    border:2px solid #ff5200;
+
+    border-radius:25px;
+
+    font-size:16px;
+
+    outline:none;
+
+}
+
+
+
+.search-form input:focus {
+
+    box-shadow:
+    0 0 8px rgba(255,82,0,0.4);
+
+}
+
+
+
+.search-form button {
+
+
+    padding:12px 25px;
+
+    background:#ff5200;
+
+    color:white;
+
+    border:none;
+
+    border-radius:25px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+}
+
+
+
+.search-form button:hover {
+
+
+    background:#e04800;
+
+    transform:scale(1.05);
+
+}

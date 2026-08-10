@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Restaurant Change</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<div class="warning-box">
+
+
+<h1>
+⚠️ Cart Contains Items
+</h1>
+
+
+<p>
+Your cart contains items from another restaurant.
+</p>
+
+
+<p>
+Please clear your cart before ordering from this restaurant.
+</p>
+
+
+<a href="/cart">
+Go To Cart
+</a>
+
+
+<a href="/clear_cart">
+Clear Cart & Continue
+</a>
+
+
+</div>
+
+
+</body>
+
+</html>
