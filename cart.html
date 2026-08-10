@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hungry - Cart</title>
+
+    <link rel="stylesheet" href="static/style.css">
+
+</head>
+
+
+<body>
+
+    <div class="logo">
+        🍔 Hungry
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="index.html">
+            🏠 Home
+        </a>
+
+        <a href="stores.html">
+            🍴 Stores
+        </a>
+
+        <a href="menu.html">
+            🍽️ Menu
+        </a>
+
+        <a href="cart.html" class="active">
+            🛒 Cart
+        </a>
+
+    </div>
+
+
+    <h1>🛒 Your Cart</h1>
+
+
+    <div id="cart-container"></div>
+
+
+    <div id="cart-summary"></div>
+
+
+    <br>
+
+    <a href="menu.html">
+        ← Continue Shopping
+    </a>
+
+
+    <script>
+
+        function displayCart() {
+
+            const cart =
+                JSON.parse(localStorage.getItem("hungryCart")) || [];
+
+            const container =
+                document.getElementById("cart-container");
+
+            const summary =
+                document.getElementById("cart-summary");
+
+
+            container.innerHTML = "";
+            summary.innerHTML = "";
+
+
+            if (cart.length === 0) {
+
+                container.innerHTML = `
+                    <div class="empty-cart">
+
+                        <h1>🛒</h1>
+
+                        <h2>Your Cart Is Empty</h2>
+
+                        <p>Start ordering your favourite food!</p>
+
+                        <a href="menu.html">
+                            Start Ordering
+                        </a>
+
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            let total = 0;
+
+
+            cart.forEach(function(item, index) {
+
+                total += Number(item.price);
+
+
+                const cartItem =
+                    document.createElement("div");
+
+                cartItem.className = "cart-item";
+
+
+                cartItem.innerHTML = `
+
+                    <h2>${item.food}</h2>
+
+                    <p>
+                        Price: ₹${item.price}
+                    </p>
+
+                    <button onclick="removeItem(${index})">
+                        Remove
+                    </button>
+
+                `;
+
+
+                container.appendChild(cartItem);
+
+            });
+
+
+            summary.innerHTML = `
+
+                <h2>
+                    Total: ₹${total}
+                </h2>
+
+                <button onclick="proceedToCheckout()">
+                    ✅ Proceed To Checkout
+                </button>
+
+                <br><br>
+
+                <button onclick="clearCart()">
+                    Clear Cart
+                </button>
+
+            `;
+
+        }
+
+
+        function removeItem(index) {
+
+            let cart =
+                JSON.parse(localStorage.getItem("hungryCart")) || [];
+
+
+            cart.splice(index, 1);
+
+
+            localStorage.setItem(
+                "hungryCart",
+                JSON.stringify(cart)
+            );
+
+
+            displayCart();
+
+        }
+
+
+        function clearCart() {
+
+            localStorage.removeItem("hungryCart");
+
+            displayCart();
+
+        }
+
+
+        function proceedToCheckout() {
+
+            window.location.href = "checkout.html";
+
+        }
+
+
+        displayCart();
+
+    </script>
+
+</body>
+
+</html>
