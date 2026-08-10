@@ -1,174 +1,410 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
-    <meta charset="UTF-8">
+```
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <title>Hungry - Checkout</title>
+<title>Hungry - Checkout</title>
 
-    <link rel="stylesheet" href="static/style.css">
+<link rel="stylesheet" href="static/style.css">
+```
 
 </head>
 
-
 <body>
 
-    <div class="logo">
-        🍔 Hungry
-    </div>
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+```
+<div class="logo">
+    🍔 Hungry
+</div>
 
 
-    <div class="nav-links">
+<div class="nav-links">
 
-        <a href="index.html">
-            🏠 Home
-        </a>
-
-        <a href="stores.html">
-            🍴 Stores
-        </a>
-
-        <a href="menu.html">
-            🍽️ Menu
-        </a>
-
-        <a href="cart.html">
-            🛒 Cart
-        </a>
-
-    </div>
-
-
-    <h1>🧾 Checkout</h1>
-
-
-    <div class="checkout-container">
-
-        <h2>Delivery Details</h2>
-
-
-        <form onsubmit="placeOrder(event)">
-
-            <input
-                type="text"
-                id="name"
-                placeholder="Enter your name"
-                required
-            >
-
-
-            <input
-                type="text"
-                id="phone"
-                placeholder="Enter phone number"
-                required
-            >
-
-
-            <textarea
-                id="address"
-                placeholder="Enter delivery address"
-                required
-            ></textarea>
-
-
-            <h2 id="total">
-                Total: ₹0
-            </h2>
-
-
-            <button type="submit">
-                Place Order
-            </button>
-
-        </form>
-
-    </div>
-
-
-    <br>
-
-    <a href="cart.html">
-        ← Back To Cart
+    <a href="index.html">
+        🏠 Home
     </a>
 
+    <a href="stores.html">
+        🍴 Stores
+    </a>
 
-    <script>
+    <a href="menu.html">
+        🍽️ Menu
+    </a>
 
-        function calculateTotal() {
+    <a href="orders.html">
+        📦 My Orders
+    </a>
 
-            let cart =
-                JSON.parse(localStorage.getItem("hungryCart")) || [];
+    <a href="cart.html">
+        🛒 Cart
+    </a>
 
-            let total = 0;
+</div>
+```
 
+</div>
 
-            cart.forEach(function(item) {
+<h1 class="cart-title">
+    🧾 Checkout
+</h1>
 
-                total += Number(item.price);
+<div class="checkout-container">
 
-            });
+```
+<!-- CUSTOMER DETAILS -->
 
-
-            document.getElementById("total").innerText =
-                "Total: ₹" + total;
-
-        }
-
-
-        function placeOrder(event) {
-
-            event.preventDefault();
-
-
-            let cart =
-                JSON.parse(localStorage.getItem("hungryCart")) || [];
-
-
-            if (cart.length === 0) {
-
-                alert("Your cart is empty!");
-
-                window.location.href = "menu.html";
-
-                return;
-
-            }
+<div class="checkout-form">
 
 
-            let customer = {
-
-                name:
-                    document.getElementById("name").value,
-
-                phone:
-                    document.getElementById("phone").value,
-
-                address:
-                    document.getElementById("address").value
-
-            };
+    <h2>
+        👤 Customer Details
+    </h2>
 
 
-            localStorage.setItem(
-                "hungryCustomer",
-                JSON.stringify(customer)
-            );
+    <form onsubmit="continueToPayment(event)">
 
 
-            window.location.href = "payment.html";
+        <label for="name">
+            Full Name
+        </label>
 
-        }
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+            required
+        >
 
 
-        calculateTotal();
+        <label for="phone">
+            Phone Number
+        </label>
 
-    </script>
+        <input
+            type="tel"
+            id="phone"
+            placeholder="Enter phone number"
+            required
+        >
 
+
+        <label for="address">
+            Delivery Address
+        </label>
+
+        <textarea
+            id="address"
+            placeholder="Enter your complete address"
+            required
+        ></textarea>
+
+
+        <label for="city">
+            City
+        </label>
+
+        <input
+            type="text"
+            id="city"
+            placeholder="Enter your city"
+            required
+        >
+
+
+        <button
+            type="submit"
+            class="checkout-btn"
+        >
+            Continue To Payment 💳
+        </button>
+
+
+    </form>
+
+
+</div>
+
+
+<!-- ORDER SUMMARY -->
+
+<div class="bill-box">
+
+
+    <h2>
+        🧾 Order Summary
+    </h2>
+
+
+    <div id="order-items">
+
+    </div>
+
+
+    <p>
+
+        <span>
+            Item Total
+        </span>
+
+        <span id="item-total">
+            ₹0
+        </span>
+
+    </p>
+
+
+    <p>
+
+        <span>
+            Delivery Fee
+        </span>
+
+        <span>
+            ₹40
+        </span>
+
+    </p>
+
+
+    <p class="grand-total">
+
+        <span>
+            Grand Total
+        </span>
+
+        <span id="grand-total">
+            ₹40
+        </span>
+
+    </p>
+
+
+</div>
+```
+
+</div>
+
+<script>
+
+
+/* ========================= */
+/* LOAD CART */
+/* ========================= */
+
+
+function getCart() {
+
+
+    return JSON.parse(
+        localStorage.getItem("hungryCart")
+    ) || [];
+
+
+}
+
+
+/* ========================= */
+/* DISPLAY ORDER SUMMARY */
+/* ========================= */
+
+
+function loadSummary() {
+
+
+    let cart = getCart();
+
+
+    let itemsContainer =
+        document.getElementById(
+            "order-items"
+        );
+
+
+    let itemTotal = 0;
+
+
+    if (cart.length === 0) {
+
+
+        itemsContainer.innerHTML = `
+
+            <p>
+                Your cart is empty.
+            </p>
+
+        `;
+
+
+        document.getElementById(
+            "item-total"
+        ).innerText = "₹0";
+
+
+        document.getElementById(
+            "grand-total"
+        ).innerText = "₹0";
+
+
+        return;
+
+    }
+
+
+    let html = "";
+
+
+    cart.forEach(function(item) {
+
+
+        let price =
+            Number(item.price) || 0;
+
+
+        let quantity =
+            Number(item.quantity) || 1;
+
+
+        let total =
+            price * quantity;
+
+
+        itemTotal += total;
+
+
+        html += `
+
+            <p>
+
+                <span>
+                    ${item.food} × ${quantity}
+                </span>
+
+                <span>
+                    ₹${total}
+                </span>
+
+            </p>
+
+        `;
+
+    });
+
+
+    let deliveryFee = 40;
+
+
+    let grandTotal =
+        itemTotal + deliveryFee;
+
+
+    itemsContainer.innerHTML = html;
+
+
+    document.getElementById(
+        "item-total"
+    ).innerText =
+        "₹" + itemTotal;
+
+
+    document.getElementById(
+        "grand-total"
+    ).innerText =
+        "₹" + grandTotal;
+
+}
+
+
+/* ========================= */
+/* CONTINUE TO PAYMENT */
+/* ========================= */
+
+
+function continueToPayment(event) {
+
+
+    event.preventDefault();
+
+
+    let cart = getCart();
+
+
+    if (cart.length === 0) {
+
+
+        alert(
+            "Your cart is empty! 🛒"
+        );
+
+
+        window.location.href =
+            "menu.html";
+
+
+        return;
+
+    }
+
+
+    let customer = {
+
+
+        name:
+            document.getElementById(
+                "name"
+            ).value,
+
+
+        phone:
+            document.getElementById(
+                "phone"
+            ).value,
+
+
+        address:
+            document.getElementById(
+                "address"
+            ).value,
+
+
+        city:
+            document.getElementById(
+                "city"
+            ).value
+
+    };
+
+
+    localStorage.setItem(
+
+        "hungryCustomer",
+
+        JSON.stringify(customer)
+
+    );
+
+
+    window.location.href =
+        "payment.html";
+
+}
+
+
+loadSummary();
+
+
+</script>
 
 </body>
 
