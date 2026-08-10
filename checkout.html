@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Hungry - Checkout</title>
+
+    <link rel="stylesheet" href="static/style.css">
+
+</head>
+
+
+<body>
+
+    <div class="logo">
+        🍔 Hungry
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="index.html">
+            🏠 Home
+        </a>
+
+        <a href="stores.html">
+            🍴 Stores
+        </a>
+
+        <a href="menu.html">
+            🍽️ Menu
+        </a>
+
+        <a href="cart.html">
+            🛒 Cart
+        </a>
+
+    </div>
+
+
+    <h1>🧾 Checkout</h1>
+
+
+    <div class="checkout-container">
+
+        <h2>Delivery Details</h2>
+
+
+        <form onsubmit="placeOrder(event)">
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your name"
+                required
+            >
+
+
+            <input
+                type="text"
+                id="phone"
+                placeholder="Enter phone number"
+                required
+            >
+
+
+            <textarea
+                id="address"
+                placeholder="Enter delivery address"
+                required
+            ></textarea>
+
+
+            <h2 id="total">
+                Total: ₹0
+            </h2>
+
+
+            <button type="submit">
+                Place Order
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <br>
+
+    <a href="cart.html">
+        ← Back To Cart
+    </a>
+
+
+    <script>
+
+        function calculateTotal() {
+
+            let cart =
+                JSON.parse(localStorage.getItem("hungryCart")) || [];
+
+            let total = 0;
+
+
+            cart.forEach(function(item) {
+
+                total += Number(item.price);
+
+            });
+
+
+            document.getElementById("total").innerText =
+                "Total: ₹" + total;
+
+        }
+
+
+        function placeOrder(event) {
+
+            event.preventDefault();
+
+
+            let cart =
+                JSON.parse(localStorage.getItem("hungryCart")) || [];
+
+
+            if (cart.length === 0) {
+
+                alert("Your cart is empty!");
+
+                window.location.href = "menu.html";
+
+                return;
+
+            }
+
+
+            let customer = {
+
+                name:
+                    document.getElementById("name").value,
+
+                phone:
+                    document.getElementById("phone").value,
+
+                address:
+                    document.getElementById("address").value
+
+            };
+
+
+            localStorage.setItem(
+                "hungryCustomer",
+                JSON.stringify(customer)
+            );
+
+
+            window.location.href = "payment.html";
+
+        }
+
+
+        calculateTotal();
+
+    </script>
+
+
+</body>
+
+</html>
