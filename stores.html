@@ -1,156 +1,237 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Hungry - Stores</title>
+```
+<meta charset="UTF-8">
 
-    <link rel="stylesheet" href="static/style.css">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Hungry - Stores</title>
+
+<link rel="stylesheet" href="static/style.css">
+```
+
 </head>
 
 <body>
 
-    <div class="logo">
-        🍔 Hungry
-    </div>
+<!-- NAVBAR -->
 
-    <nav>
-        <a href="index.html">
-            🏠 Home
-        </a>
+<div class="navbar">
 
-        <a href="stores.html" class="active">
-            🍴 Stores
-        </a>
-
-        <a href="cart.html">
-            🛒 Cart
-        </a>
-
-        <a href="orders.html">
-            📦 My Orders
-        </a>
-    </nav>
+```
+<div class="logo">
+    🍔 Hungry
+</div>
 
 
-    <div class="search-box">
+<div class="nav-links">
 
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="🔍 Search Restaurant..."
-        >
+    <a href="index.html">
+        🏠 Home
+    </a>
 
-        <button onclick="searchStores()">
-            Search
-        </button>
+    <a href="stores.html" class="active">
+        🍴 Stores
+    </a>
 
-    </div>
+    <a href="cart.html">
+        🛒 Cart
+    </a>
 
+    <a href="orders.html">
+        📦 My Orders
+    </a>
 
-    <div id="stores-container">
+</div>
+```
 
-        <div class="store">
+</div>
 
-            <img
-                src="static/images/biryani_house.jpg"
-                class="store-image"
-                alt="Biryani House"
-            >
+<!-- PAGE TITLE -->
 
-            <h2>Biryani House</h2>
+<h1 class="page-title">
+    🍴 Explore Stores
+</h1>
 
-            <p>⭐ 4.5</p>
+<p class="subtitle">
+    Choose your favourite restaurant
+</p>
 
-            <a href="menu.html" class="explore-btn">
-                View Menu
-            </a>
+<!-- SEARCH -->
 
-        </div>
+<form class="search-form" onsubmit="searchStores(event)">
 
+```
+<input
+    type="text"
+    id="searchInput"
+    placeholder="🔍 Search Restaurant..."
+>
 
-        <div class="store">
+<button type="submit">
+    Search
+</button>
+```
 
-            <img
-                src="static/images/food_fusion.jpg"
-                class="store-image"
-                alt="Food Fusion"
-            >
+</form>
 
-            <h2>Food Fusion</h2>
+<!-- STORES -->
 
-            <p>⭐ 4.3</p>
+<div class="store-container">
 
-            <a href="menu.html" class="explore-btn">
-                View Menu
-            </a>
+```
+<!-- BIRYANI HOUSE -->
 
-        </div>
+<div class="store-card">
 
+    <img
+        src="static/images/biryani_house.jpg"
+        class="store-image"
+        alt="Biryani House"
+    >
 
-        <div class="store">
+    <h2>
+        Biryani House
+    </h2>
 
-            <img
-                src="static/images/ghar_ka_khana.jpg"
-                class="store-image"
-                alt="Ghar Ka Khana"
-            >
+    <p>
+        Authentic and delicious biryani
+    </p>
 
-            <h2>Ghar Ka Khana</h2>
-
-            <p>⭐ 4.6</p>
-
-            <a href="menu.html" class="explore-btn">
-                View Menu
-            </a>
-
-        </div>
-
-    </div>
-
+    <span class="rating">
+        ⭐ 4.5
+    </span>
 
     <br>
 
-    <a href="index.html">
-        ← Back Home
+    <a
+        href="menu.html"
+        class="btn"
+    >
+        View Menu
     </a>
 
+</div>
 
-    <script>
 
-        function searchStores() {
+<!-- FOOD FUSION -->
 
-            let search =
-                document.getElementById("searchInput")
-                .value
-                .toLowerCase();
+<div class="store-card">
 
-            let stores =
-                document.querySelectorAll(".store");
+    <img
+        src="static/images/food_fusion.jpg"
+        class="store-image"
+        alt="Food Fusion"
+    >
 
-            stores.forEach(function(store) {
+    <h2>
+        Food Fusion
+    </h2>
 
-                let name =
-                    store.querySelector("h2")
-                    .innerText
-                    .toLowerCase();
+    <p>
+        Delicious Indian and international food
+    </p>
 
-                if (name.includes(search)) {
+    <span class="rating">
+        ⭐ 4.3
+    </span>
 
-                    store.style.display = "";
+    <br>
 
-                } else {
+    <a
+        href="menu.html"
+        class="btn"
+    >
+        View Menu
+    </a>
 
-                    store.style.display = "none";
+</div>
 
-                }
 
-            });
+<!-- GHAR KA KHANA -->
+
+<div class="store-card">
+
+    <img
+        src="static/images/ghar_ka_khana.jpg"
+        class="store-image"
+        alt="Ghar Ka Khana"
+    >
+
+    <h2>
+        Ghar Ka Khana
+    </h2>
+
+    <p>
+        Homestyle food made with love
+    </p>
+
+    <span class="rating">
+        ⭐ 4.6
+    </span>
+
+    <br>
+
+    <a
+        href="menu.html"
+        class="btn"
+    >
+        View Menu
+    </a>
+
+</div>
+```
+
+</div>
+
+<script>
+
+function searchStores(event) {
+
+    event.preventDefault();
+
+
+    let search =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+
+    let stores =
+        document.querySelectorAll(".store-card");
+
+
+    stores.forEach(function(store) {
+
+        let name =
+            store
+            .querySelector("h2")
+            .innerText
+            .toLowerCase();
+
+
+        if (name.includes(search)) {
+
+            store.style.display = "";
+
+        } else {
+
+            store.style.display = "none";
 
         }
 
-    </script>
+    });
+
+}
+
+</script>
 
 </body>
+
 </html>
