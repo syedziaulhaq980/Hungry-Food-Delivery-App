@@ -444,22 +444,44 @@
 
 function addToCart(food, price) {
 
-
     let cart =
         JSON.parse(
             localStorage.getItem("hungryCart")
         ) || [];
 
 
-    cart.push({
+    // Check whether food already exists
 
-        food: food,
+    let existingItem =
+        cart.find(function(item) {
 
-        price: price,
+            return item.food === food;
 
-        quantity: 1
+        });
 
-    });
+
+    if (existingItem) {
+
+        // Increase quantity
+
+        existingItem.quantity =
+            (Number(existingItem.quantity) || 1) + 1;
+
+    } else {
+
+        // Add new food
+
+        cart.push({
+
+            food: food,
+
+            price: Number(price),
+
+            quantity: 1
+
+        });
+
+    }
 
 
     localStorage.setItem(
@@ -472,9 +494,7 @@ function addToCart(food, price) {
         food + " added to cart! 🛒"
     );
 
-
 }
-
 
 </script>
 
