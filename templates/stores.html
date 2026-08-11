@@ -16,7 +16,7 @@
 
 <body>
 <nav class="nav-links">
-
+    
     <div class="logo">
         🍔 Hungry
     </div>
@@ -29,7 +29,7 @@
         🍴 Stores
     </a>
 
-    </a>
+   
 
     <a href="/cart">
         🛒 Cart
@@ -40,10 +40,16 @@
                 {{session.get("cart_count")}}
             </span>
             {% endif %}
+    
+    {% if session.get("user_id") %}
 
+    <a href="/account">
+    👤 {{ session["user"]["name"] }}
+    </a>
     <a href="/orders">
         📦 My Orders
     </a>
+{% endif %}
 
 </nav>
 

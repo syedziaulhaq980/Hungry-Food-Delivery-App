@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 
 <head>
 
-    <title>My Orders</title>
+    <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Orders - Hungry</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
-<body>
+<body class="orders-page">
 
-<h1 class="cart-title">
-📦 My Orders
-</h1>
 <nav class="navbar">
 
     <div class="logo">
@@ -27,6 +29,10 @@
             🍴 Stores
         </a>
 
+        <a href="/search_food">
+            🔍 Search Food
+        </a>
+
         <a href="/orders" class="active">
             📦 My Orders
         </a>
@@ -34,99 +40,108 @@
         <a href="/cart">
             🛒 Cart
 
-            {% if session.get("cart_count",0) > 0 %}
-            <span class="cart-count">
-                {{session.get("cart_count")}}
-            </span>
+            {% if session.get("cart_count", 0) > 0 %}
+
+                <span class="cart-count">
+                    {{ session.get("cart_count") }}
+                </span>
+
             {% endif %}
 
         </a>
 
+        <a href="/account" class="account-nav">
+    👤 {{ session["user"]["name"] }}
+         </a>
+
     </div>
 
 </nav>
-{% if orders %}
+
 
 <div class="orders-container">
 
-{% for order in orders %}
+    <h1>📦 My Orders</h1>
 
-<div class="order-card">
 
-<h2>
-Order ID: {{order["order_id"]}}
-</h2>
+    {% if orders %}
 
-<p>
-👤 {{order["name"]}}
-</p>
+        {% for order in orders %}
 
-<p>
-💳 {{order["payment"]}}
-</p>
+            <div class="order-card">
 
-<hr>
+                <div class="order-header">
 
-<h3>Items</h3>
+                    <h2>
+                        Order #{{ order[0] }}
+                    </h2>
 
-{% for item in order["items"] %}
+                    <span class="order-status">
+                        ✅ Confirmed
+                    </span>
 
-<p>
+                </div>
 
-{{item["food"]}}
 
-×
+                <div class="order-details">
 
-{{item["quantity"]}}
+                    <p>
+                        <strong>Customer:</strong>
+                        {{ order[1] }}
+                    </p>
 
--
+                    <p>
+                        <strong>Phone:</strong>
+                        {{ order[2] }}
+                    </p>
 
-₹{{item["price"] * item["quantity"]}}
+                    <p>
+                        <strong>Address:</strong>
+                        {{ order[3] }}
+                    </p>
 
-</p>
+                    <p>
+                        <strong>Total:</strong>
+                        ₹{{ order[4] }}
+                    </p>
 
-{% endfor %}
+                    <p>
+                        <strong>Payment:</strong>
+                        {{ order[5] }}
+                    </p>
 
-<hr>
+                    <p>
+                        <strong>Order Date:</strong>
+                        {{ order[6] }}
+                    </p>
 
-<h2>
+                </div>
 
-Total : ₹{{order["total"]}}
+            </div>
 
-</h2>
+        {% endfor %}
+
+    {% else %}
+
+        <div class="no-orders">
+
+            <h2>😔 No Orders Yet</h2>
+
+            <p>
+                You haven't placed any orders yet.
+            </p>
+
+            <a href="/stores" class="explore-btn">
+                🍴 Start Ordering
+            </a>
+
+        </div>
+
+    {% endif %}
 
 </div>
-
-{% endfor %}
-
-</div>
-
-{% else %}
-
-<div class="empty-cart">
-
-<h2>
-
-No Orders Yet 📦
-
-</h2>
-
-<p>
-
-Start ordering delicious food.
-
-</p>
-
-<a href="/stores">
-
-Order Now
-
-</a>
-
-</div>
-
-{% endif %}
 
 </body>
 
 </html>
+

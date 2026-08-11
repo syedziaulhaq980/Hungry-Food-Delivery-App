@@ -49,7 +49,9 @@
                 {% endif %}
 
             </a>
-
+        <a href="/account" class="account-nav">
+                👤 {{ session["user"]["name"] }}
+        </a>
         </div>
 
     </nav>
@@ -165,4 +167,4 @@
 </body>
 
 </html>
-```
+

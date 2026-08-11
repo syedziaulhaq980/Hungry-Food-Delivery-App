@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Account - Hungry</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body class="account-page">
+
+    <div class="account-container">
+
+        <h1>🍔 Hungry</h1>
+
+        <h2>Welcome, {{ session["user"]["name"] }}! 👋</h2>
+
+        <div class="account-details">
+
+            <p>
+                <strong>Name:</strong>
+                {{ session["user"]["name"] }}
+            </p>
+
+            <p>
+                <strong>Email:</strong>
+                {{ session["user"]["email"] }}
+            </p>
+
+            <p>
+                <strong>Phone:</strong>
+                {{ session["user"]["phone"] }}
+            </p>
+             
+            <p>
+                 <strong>Address:</strong>
+                 {{ session["user"]["address"] }}
+            </p>
+        </div>
+
+        <br>
+
+        <a href="/stores">
+            🍴 Browse Stores
+        </a>
+
+        <br><br>
+
+        <a href="/orders">
+            📦 My Orders
+        </a>
+
+        <br><br>
+
+        <a href="/logout">
+            🚪 Logout
+        </a>
+
+    </div>
+
+</body>
+
+</html>
+

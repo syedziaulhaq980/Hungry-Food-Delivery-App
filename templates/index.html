@@ -1,40 +1,62 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
     <title>Hungry</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
 
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+
+
+</head>
 
 <body>
 
 <div class="home">
 
-    <h1>🍔 Hungry</h1>
+<h1>🍔 Hungry</h1>
 
-    <p>
-        Delicious food delivered to your doorstep
-    </p>
+<p>
+    Delicious food delivered to your doorstep
+</p>
 
-
-    <div class="home-buttons">
-
-        <a class="explore-btn" href="/stores">
-            Explore Stores
-        </a>
+<div class="home-buttons">
 
 
-        <a class="cart-btn-home" href="/cart">
-            🛒 Cart
-        </a>
+{% if session.get("user_id") %}
 
-    </div>
+    <a class="explore-btn" href="/stores">
+        🍴 Explore Stores
+    </a>
+
+    <a class="cart-btn-home" href="/cart">
+        🛒 Cart
+    </a>
+
+    <a class="account-btn-home" href="/account">
+        👤 My Account
+    </a>
+
+{% else %}
+
+    <a class="explore-btn" href="/login">
+        🔐 Login
+    </a>
+
+    <a class="cart-btn-home" href="/signup">
+        📝 Create Account
+    </a>
+
+{% endif %}
 
 
 </div>
 
+
+
+</div>
 
 </body>
 </html>

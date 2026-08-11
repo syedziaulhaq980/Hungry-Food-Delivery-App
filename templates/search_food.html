@@ -1,111 +1,136 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
-    <meta charset="UTF-8">
+```
+<meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <title>Search Food</title>
+<title>Search Food - Hungry</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+```
 
 </head>
 
-<body>
+<body class="search-page">
+
+<nav class="navbar">
+
+```
+<div class="logo">
+    🍔 Hungry
+</div>
+
+<div class="nav-links">
+
+    <a href="/">
+        🏠 Home
+    </a>
+
+    <a href="/stores">
+        🍴 Stores
+    </a>
+
+    <a href="/search_food" class="active">
+        🔍 Search Food
+    </a>
+
+    <a href="/orders">
+        📦 My Orders
+    </a>
+
+    <a href="/cart">
+        🛒 Cart
+
+        {% if session.get("cart_count", 0) > 0 %}
+            <span class="cart-count">
+                {{ session.get("cart_count") }}
+            </span>
+        {% endif %}
+
+    </a>
+
+    {% if session.get("user_id") %}
+
+        <a href="/account">
+            👤 {{ session["user"]["name"] }}
+        </a>
+
+    {% endif %}
+
+</div>
+```
+
+</nav>
 
 <h1 class="page-title">
-🔍 Search Food
+    🔍 Search Food
 </h1>
 
-<form action="/search_food" method="GET" class="search-form">
+<form action="/search_food"
+      method="GET"
+      class="search-form">
 
-    <input
-        type="text"
-        name="search"
-        placeholder="Search Food..."
-        value="{{ search }}">
+```
+<input
+    type="text"
+    name="search"
+    placeholder="Search Food..."
+    value="{{ search }}">
 
-    <button type="submit">
-        Search
-    </button>
+<button type="submit">
+    Search
+</button>
+```
 
 </form>
 
-```html
 {% if results %}
 
+```
 <div class="store-container">
 
     {% for item in results %}
 
-    <div class="store-card">
+        <div class="store-card">
 
-        <h2>
-            {{ item.food }}
-        </h2>
+            <h2>
+                {{ item.food }}
+            </h2>
 
-        <p>
-            🏪 {{ item.store.name }}
-        </p>
+            <p>
+                🏪 {{ item.store.name }}
+            </p>
 
-        <p>
-            📂 {{ item.category }}
-        </p>
+            <p>
+                📂 {{ item.category }}
+            </p>
 
-        <p>
-            💰 ₹{{ item.price }}
-        </p>
+            <p>
+                💰 ₹{{ item.price }}
+            </p>
 
-        <div class="search-card-buttons">
-
-            <a class="btn" href="/menu/{{ item.store.store_id }}">
+            <a class="btn"
+               href="/menu/{{ item.store.store_id }}">
                 View Restaurant
             </a>
 
-            <form action="/add_to_cart" method="POST">
-
-                <input type="hidden"
-                       name="food"
-                       value="{{ item.food }}">
-
-                <input type="hidden"
-                       name="price"
-                       value="{{ item.price }}">
-
-                <input type="hidden"
-                       name="store_id"
-                       value="{{ item.store.store_id }}">
-
-                <input type="hidden"
-                       name="quantity"
-                       value="1">
-                <input type="hidden"
-                       name="source" 
-                       value="search">
-                <button type="submit" class="add-btn">
-
-                      {% if item.quantity > 0 %}
-                      + {{ item.quantity }}
-                     {% else %}
-                          + Add
-                      {% endif %}
-
-    </button>
-
-            </form>
-
         </div>
-
-    </div>
 
     {% endfor %}
 
 </div>
+```
 
 {% elif search %}
 
+```
 <div class="empty-cart">
 
     <h2>
@@ -117,15 +142,13 @@
     </p>
 
 </div>
-
-{% endif %}
 ```
 
+{% endif %}
 
 <a class="home-link" href="/stores">
-← Back to Stores
+    ← Back to Stores
 </a>
 
 </body>
-
 </html>

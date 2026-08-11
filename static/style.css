@@ -1544,36 +1544,75 @@ body:has(.store-container) {
    ORDERS PAGE
 ========================= */
 
+
+
+.orders-page {
+    background: #f5f5f5;
+}
+
 .orders-container {
-
-    width: 80%;
-
+    width: 90%;
+    max-width: 900px;
     margin: 40px auto;
 }
 
+.orders-container > h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
 .order-card {
-
     background: white;
-
     padding: 25px;
-
     margin-bottom: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+}
 
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.order-header h2 {
+    margin: 0;
+}
+
+.order-status {
+    background: #e8f7ed;
+    color: #218838;
+    padding: 7px 12px;
     border-radius: 20px;
-
-    box-shadow:
-        0 8px 20px rgba(0,0,0,0.1);
+    font-size: 14px;
+    font-weight: bold;
 }
 
-.order-card h2 {
-
-    color: #ff5200;
+.order-details p {
+    margin: 10px 0;
 }
 
-.order-card h3 {
-
-    margin-top: 20px;
+.no-orders {
+    background: white;
+    text-align: center;
+    padding: 50px 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
 }
+
+.no-orders h2 {
+    margin-bottom: 10px;
+}
+
+.no-orders p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+
 
 
 /* =========================
@@ -2280,3 +2319,885 @@ body.success-page {
     background-repeat: no-repeat !important;
     background-attachment: fixed;
 }
+/* =========================================
+HUNGRY - LOGIN PAGE
+FINAL ALIGNED VERSION
+========================================= */
+
+body.auth-page {
+margin: 0 !important;
+padding: 0 !important;
+min-height: 100vh;
+
+
+font-family: Arial, Helvetica, sans-serif;
+
+background: #fff7f1;
+
+
+}
+
+/* MAIN PAGE */
+
+.auth-wrapper {
+width: 100%;
+min-height: 100vh;
+
+
+display: flex;
+margin: 0;
+padding: 0;
+
+
+}
+
+/* =========================================
+LEFT SIDE
+========================================= */
+
+.auth-brand {
+width: 50%;
+min-height: 100vh;
+
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+box-sizing: border-box;
+
+padding: 60px;
+
+background: linear-gradient(
+    135deg,
+    #ff6b35,
+    #ff914d
+);
+
+color: white;
+
+}
+
+.brand-content {
+width: 100%;
+max-width: 500px;
+}
+
+.brand-content h1 {
+margin: 0 0 25px;
+
+
+font-size: 50px;
+line-height: 1.1;
+
+
+}
+
+.brand-content h2 {
+margin: 0 0 20px;
+
+
+font-size: 36px;
+line-height: 1.2;
+
+
+}
+
+.brand-content p {
+margin: 0;
+
+
+max-width: 450px;
+
+font-size: 17px;
+line-height: 1.7;
+
+
+}
+
+.food-icons {
+margin-top: 35px;
+
+
+font-size: 40px;
+
+letter-spacing: 8px;
+
+
+}
+
+/* =========================================
+RIGHT SIDE
+========================================= */
+
+.auth-form-section {
+width: 50%;
+min-height: 100vh;
+
+
+display: flex;
+
+align-items: center;
+justify-content: center;
+
+box-sizing: border-box;
+
+padding: 40px;
+
+
+}
+
+/* LOGIN CARD */
+
+.auth-card {
+width: 100%;
+max-width: 430px;
+
+
+box-sizing: border-box;
+
+background: #ffffff;
+
+padding: 45px;
+
+border-radius: 20px;
+
+box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.10);
+
+
+}
+
+/* =========================================
+CARD TEXT
+========================================= */
+
+.auth-card h2 {
+margin: 0 0 8px;
+
+
+font-size: 30px;
+
+line-height: 1.2;
+
+color: #222;
+
+
+}
+
+.auth-subtitle {
+margin: 0 0 30px;
+
+
+color: #777;
+
+font-size: 15px;
+
+}
+
+/* =========================================
+INPUT GROUP
+========================================= */
+
+.input-group {
+width: 100%;
+
+
+margin-bottom: 20px;
+
+
+}
+
+.input-group label {
+display: block;
+
+
+margin-bottom: 8px;
+
+color: #333;
+
+font-size: 14px;
+
+font-weight: 600;
+
+
+}
+
+.input-group input {
+display: block;
+
+
+width: 100%;
+
+height: 48px;
+
+box-sizing: border-box;
+
+padding: 0 14px;
+
+border: 1px solid #ddd;
+
+border-radius: 10px;
+
+outline: none;
+
+background: #fff;
+
+color: #222;
+
+font-size: 15px;
+
+
+}
+
+.input-group input:focus {
+border-color: #ff6b35;
+
+
+box-shadow:
+    0 0 0 3px rgba(255, 107, 53, 0.12);
+
+
+}
+
+/* =========================================
+PASSWORD
+========================================= */
+
+.password-box {
+position: relative;
+
+
+width: 100%;
+
+
+}
+
+.password-box input {
+padding-right: 50px;
+}
+
+.password-toggle {
+position: absolute;
+
+
+top: 50%;
+right: 12px;
+
+transform: translateY(-50%);
+
+width: 35px;
+height: 35px;
+
+padding: 0;
+
+border: none;
+
+background: transparent;
+
+cursor: pointer;
+
+font-size: 17px;
+
+
+}
+
+/* =========================================
+LOGIN BUTTON
+========================================= */
+
+.login-btn {
+display: block;
+
+
+width: 100%;
+height: 48px;
+
+margin-top: 5px;
+
+border: none;
+
+border-radius: 10px;
+
+background: #ff6b35;
+
+color: white;
+
+font-size: 16px;
+
+font-weight: bold;
+
+cursor: pointer;
+
+transition: 0.25s;
+
+
+}
+
+.login-btn:hover {
+background: #e95725;
+
+
+transform: translateY(-1px);
+
+
+}
+
+/* =========================================
+DIVIDER
+========================================= */
+
+.auth-divider {
+display: flex;
+
+
+align-items: center;
+
+gap: 12px;
+
+width: 100%;
+
+margin: 28px 0;
+
+color: #aaa;
+
+font-size: 12px;
+
+
+}
+
+.auth-divider::before,
+.auth-divider::after {
+content: "";
+
+height: 1px;
+
+flex: 1;
+
+background: #e5e5e5;
+
+
+}
+
+.auth-divider span {
+flex-shrink: 0;
+}
+
+/* =========================================
+SIGNUP TEXT
+========================================= */
+
+.signup-text {
+margin: 0;
+
+
+text-align: center;
+
+color: #777;
+
+font-size: 14px;
+
+
+}
+
+.signup-text a {
+color: #ff6b35;
+
+font-weight: bold;
+
+text-decoration: none;
+
+
+}
+
+.signup-text a:hover {
+text-decoration: underline;
+}
+
+/* =========================================
+BACK HOME
+========================================= */
+
+.back-home {
+display: block;
+
+
+margin-top: 22px;
+
+text-align: center;
+
+color: #777;
+
+font-size: 14px;
+
+text-decoration: none;
+
+
+}
+
+.back-home:hover {
+color: #ff6b35;
+}
+
+/* =========================================
+MOBILE
+========================================= */
+
+.mobile-logo {
+display: none;
+
+
+margin-bottom: 25px;
+
+color: #ff6b35;
+
+font-size: 30px;
+
+font-weight: bold;
+
+
+}
+
+@media (max-width: 850px) {
+
+
+.auth-brand {
+    display: none;
+}
+
+.auth-page .signup-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+}
+
+
+
+.auth-page {
+    background-image: url("/static/images/istockphoto-2228190984-612x61210.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+
+.auth-form-section {
+    width: 100%;
+
+    min-height: 100vh;
+
+    padding: 25px;
+}
+
+.mobile-logo {
+    display: block;
+}
+
+
+}
+
+@media (max-width: 480px) {
+
+
+.auth-form-section {
+    padding: 15px;
+}
+
+.auth-card {
+    padding: 30px 22px;
+
+    border-radius: 16px;
+}
+
+.auth-card h2 {
+    font-size: 26px;
+}
+
+
+}
+
+
+
+/* ============================= */
+/* CREATE ACCOUNT PAGE */
+/* ============================= */
+
+.signup-container {
+    width: 400px;
+    max-width: 90%;
+    margin: 70px auto;
+    padding: 35px 40px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    text-align: center;
+}
+
+.signup-container h1 {
+    margin-bottom: 8px;
+    font-size: 32px;
+}
+
+.signup-container h2 {
+    margin-bottom: 28px;
+    font-size: 22px;
+    color: #333;
+}
+
+/* Form */
+
+.signup-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.signup-container input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 16px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.signup-container input:focus {
+    border-color: #ff6b35;
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.12);
+}
+
+/* Create Account Button */
+
+.signup-container button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 10px;
+    background: #ff6b35;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.signup-container button:hover {
+    background: #e85b2a;
+    transform: translateY(-1px);
+}
+
+/* Login text */
+
+.signup-container p {
+    margin-top: 22px;
+    color: #666;
+    font-size: 14px;
+}
+
+.signup-container a {
+    color: #ff6b35;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-container a:hover {
+    text-decoration: underline;
+}
+
+/* ============================= */
+/* SIGNUP PAGE BACKGROUND */
+/* ============================= */
+
+.signup-page {
+    min-height: 100vh;
+    margin: 0;
+
+    background: linear-gradient(
+        135deg,
+        #fff7f1,
+        #ffe2d1
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* SIGNUP CARD */
+
+.signup-page .signup-container {
+    width: 400px;
+    max-width: 90%;
+
+    margin: 0;
+
+    padding: 40px;
+
+    background: rgba(255, 255, 255, 0.97);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.12);
+
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+
+/* LOGO */
+
+.signup-page .signup-container h1 {
+    margin: 0 0 10px;
+
+    font-size: 36px;
+}
+
+
+/* TITLE */
+
+.signup-page .signup-container h2 {
+    margin: 0 0 28px;
+
+    font-size: 23px;
+
+    color: #333;
+}
+
+
+/* INPUTS */
+
+.signup-page .signup-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.signup-page .signup-container input {
+    width: 100%;
+
+    height: 48px;
+
+    box-sizing: border-box;
+
+    padding: 0 15px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: 15px;
+}
+
+
+.signup-page .signup-container input:focus {
+    border-color: #ff6b35;
+
+    box-shadow:
+        0 0 0 3px rgba(255, 107, 53, 0.12);
+}
+
+
+/* BUTTON */
+
+.signup-page .signup-container button {
+    width: 100%;
+
+    height: 48px;
+
+    margin-top: 5px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #ff6b35;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.signup-page .signup-container button:hover {
+    background: #e85b2a;
+
+    transform: translateY(-2px);
+}
+
+
+/* LOGIN LINK */
+
+.signup-page .signup-container p {
+    margin-top: 22px;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+.signup-page .signup-container a {
+    color: #ff6b35;
+
+    font-weight: bold;
+
+    text-decoration: none;
+}
+
+
+.signup-page .signup-container a:hover {
+    text-decoration: underline;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 500px) {
+
+    .signup-page .signup-container {
+        padding: 30px 22px;
+    }
+
+    .signup-page .signup-container h1 {
+        font-size: 30px;
+    }
+
+    .signup-page .signup-container h2 {
+        font-size: 21px;
+    }
+
+}
+
+/* =========================
+   ACCOUNT PAGE
+========================= */
+
+.account-page {
+    min-height: 100vh;
+    margin: 0;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #fff7ed, #ffe4d6);
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* My Account button on Home Page */
+
+.account-btn-home {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 10px;
+    background: #ff6b35;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s ease;
+}
+
+.account-btn-home:hover {
+    background: #e85a2a;
+    transform: translateY(-2px);
+}
+.account-nav {
+    text-decoration: none;
+    color: white;
+    background: #ff6b35;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.account-nav:hover {
+    background: #e85a2a;
+}
+.account-container {
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    text-align: center;
+}
+
+.account-container h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.account-container h2 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.account-details {
+    text-align: left;
+    background: #fff8f3;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+.account-details p {
+    margin: 15px 0;
+    font-size: 16px;
+    color: #444;
+}
+
+.account-details strong {
+    color: #222;
+}
+
+/* Account buttons */
+
+.account-container a {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    text-decoration: none;
+    padding: 13px 20px;
+    margin: 12px 0;
+    border-radius: 10px;
+    background: #ff6b35;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.account-container a:hover {
+    background: #e85a2a;
+    transform: translateY(-2px);
+}
+
+/* Logout button */
+
+.account-container a[href="/logout"] {
+    background: #333;
+}
+
+.account-container a[href="/logout"]:hover {
+    background: #111;
+}
+
+
