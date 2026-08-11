@@ -439,7 +439,7 @@ class DeliveryApp:
 stores = [
     FoodRestaurant(
     1,
-    "BIRYANI HOUSE",
+    "THE DINING REPLUBLIC",
     4.5,
     "30-40 mins",
     50,
@@ -562,11 +562,11 @@ stores = [
             }
         }
     },
-    "biryani_house.jpg"
+    "mordern1.jpg"
 ),
     FoodRestaurant(
         2,
-        "GHAR KA KHANA",
+        "HOUSE OF SAFFRON",
         4.6,
         "25-35 mins",
         60,
@@ -721,11 +721,11 @@ stores = [
 
                         },
                       },
-                          "ghar_ka_khana.jpg"
+                          "mordern2.jpg"
                ),
     FoodRestaurant(
     3,
-    "FOOD FUSION",
+    "THE CULINARY CROWN",
     4.9,
     "35-45 mins",
     70,
@@ -935,7 +935,7 @@ stores = [
             }
         }
     },
-    "food_fusion.jpg"
+    "mordern3.jpg"
 ),
 ]
 grocery1 = GroceryStore(
@@ -1069,7 +1069,7 @@ grocery1 = GroceryStore(
             }
         }
     },
-    "grocery.jpg"
+    "mordern6.jpg"
 )
 
 
@@ -1204,7 +1204,7 @@ utensils1 = UtensilsStore(
             }
         }
     },
-    "utensils.jpg"
+    "mordern7.jpg"
 )
 
 

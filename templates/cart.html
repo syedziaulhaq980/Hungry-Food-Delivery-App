@@ -1,271 +1,168 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<title>Your Cart</title>
+    <title>Hungry - Cart</title>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
 
-<body class="cart-page">
+<body class = "cart-page">
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <div class="logo">
+            🍔 Hungry
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/stores">
+                🍴 Stores
+            </a>
+
+            <a href="/orders">
+                📦 My Orders
+            </a>
+
+            <a href="/cart" class="active">
+
+                🛒 Cart
+
+                {% if session.get("cart_count", 0) > 0 %}
+
+                    <span class="cart-count">
+                        {{ session.get("cart_count") }}
+                    </span>
+
+                {% endif %}
+
+            </a>
+
+        </div>
+
+    </nav>
 
 
-<h1 class="cart-title">
-    🛒 Your Cart
-</h1>
-<nav class="navbar">
+    <!-- ================= CART PAGE ================= -->
 
-    <div class="logo">
-        🍔 Hungry
-    </div>
+  
 
-    <div class="nav-links">
+        <div class="cart-container">
 
-        <a href="/stores">
-            🍴 Stores
-        </a>
+            <h1 class="cart-title">
+                🛒 Your Cart
+            </h1>
 
-        <a href="/orders">
-            📦 My Orders
-        </a>
 
-        <a href="/cart" class="active">
-            🛒 Cart
+            {% if items %}
 
-            {% if session.get("cart_count",0) > 0 %}
-            <span class="cart-count">
-                {{session.get("cart_count")}}
-            </span>
+                {% for item in items %}
+
+                    <div class="cart-item">
+
+                        <div>
+
+                            <div class="item-name">
+                                {{ item["name"] }}
+                            </div>
+
+                            <div class="item-info">
+                                Qty : {{ item["quantity"] }}
+                            </div>
+
+                            <div class="item-info">
+                                Price : ₹{{ item["price"] }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="item-total">
+
+                            ₹{{ item["price"] * item["quantity"] }}
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+
+                <!-- TOTAL -->
+
+                <div class="cart-total">
+
+                    Total :
+                    ₹{{ total }}
+
+                </div>
+
+
+                <!-- BUTTONS -->
+
+                <div class="cart-buttons">
+
+                    <a href="/stores"
+                       class="btn continue">
+
+                        ← Continue Shopping
+
+                    </a>
+
+
+                    <a href="/checkout"
+                       class="btn checkout">
+
+                        ✅ Proceed To Checkout
+
+                    </a>
+
+                </div>
+
+
+            {% else %}
+
+
+                <!-- EMPTY CART -->
+
+                <div class="empty-cart">
+
+                    <div class="cart-icon">
+                        🛒
+                    </div>
+
+                    <h2>
+                        Your Cart Is Empty
+                    </h2>
+
+                    <a href="/stores"
+                       class="order-btn">
+
+                        Start Ordering
+
+                    </a>
+
+                </div>
+
             {% endif %}
 
-        </a>
+        </div>
 
     </div>
-
-</nav>
-
-
-
-{% if items %}
-
-
-<div class="cart-container">
-
-
-<div class="cart-items">
-
-
-{% for item in items %}
-
-
-<div class="cart-card">
-
-
-<div class="cart-food-info">
-
-
-<div class="food-icon">
-    🍽️
-</div>
-
-
-<div>
-
-<h3>
-{{ item["food"] }}
-</h3>
-
-
-<p>
-₹{{ item["price"] }} per item
-</p>
-
-
-</div>
-
-
-</div>
-
-
-
-<div class="quantity-box">
-
-Qty :
-
-<strong>
-{{ item["quantity"] }}
-</strong>
-
-</div>
-
-
-
-
-<div class="item-total">
-
-₹{{ item["price"] * item["quantity"] }}
-
-</div>
-
-
-
-</div>
-
-
-{% endfor %}
-
-
-</div>
-
-
-
-
-<div class="bill-box">
-
-
-<h2>
-🧾 Bill Summary
-</h2>
-
-
-
-<p>
-
-<span>
-Items Total
-</span>
-
-
-<span>
-₹{{ grand_total }}
-</span>
-
-
-</p>
-
-
-
-
-<p>
-
-<span>
-Delivery Fee
-</span>
-
-
-<span>
-Included
-</span>
-
-
-</p>
-
-
-
-
-<hr>
-
-
-
-
-<p class="grand-total">
-
-
-<span>
-Grand Total
-</span>
-
-
-<span>
-₹{{ grand_total }}
-</span>
-
-
-</p>
-
-
-
-
-<a class="checkout-btn" href="/checkout">
-
-✅ Proceed To Checkout
-
-</a>
-
-
-
-</div>
-
-
-
-
-
-<a class="continue-btn" href="/stores">
-
-← Continue Shopping
-
-</a>
-
-
-
-</div>
-
-
-
-
-{% else %}
-
-
-
-
-<!-- EMPTY CART DESIGN -->
-
-
-<div class="empty-cart">
-
-
-<div class="empty-cart-icon">
-
-🛒
-
-</div>
-
-
-<h2>
-Your Cart Is Empty
-</h2>
-
-
-<p>
-Looks like you haven't added anything yet.
-</p>
-
-
-
-<a href="/stores">
-
-Start Ordering
-
-</a>
-
-
-
-</div>
-
-
-
-{% endif %}
-
-
 
 </body>
 
 </html>
+```

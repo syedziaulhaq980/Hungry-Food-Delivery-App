@@ -15,7 +15,7 @@
 </head>
 
 
-<body class="cart-page">
+<body class="checkout-page">
 
 
 <h1 class="cart-title">
@@ -66,17 +66,25 @@ required
 
 
 
-<label>
-Address
+<label for="address">
+    Delivery Address
 </label>
 
-
 <textarea
-name="address"
-placeholder="Enter delivery address"
-required
+    id="address"
+    name="address"
+    placeholder="Enter your complete delivery address"
+    required
 ></textarea>
 
+<a
+    href="#"
+    id="map-link"
+    target="_blank"
+    style="display:none;"
+>
+    📍 Open Location in Google Maps
+</a>
 
 
 <button class="checkout-btn">
@@ -152,6 +160,34 @@ Total
 
 
 </div>
+<script>
+
+const addressInput = document.getElementById("address");
+const mapLink = document.getElementById("map-link");
+
+addressInput.addEventListener("input", function () {
+
+    const address = addressInput.value.trim();
+
+    if (address !== "") {
+
+        const encodedAddress = encodeURIComponent(address);
+
+        mapLink.href =
+            "https://www.google.com/maps/search/?api=1&query="
+            + encodedAddress;
+
+        mapLink.style.display = "inline-block";
+
+    } else {
+
+        mapLink.style.display = "none";
+
+    }
+
+});
+
+</script>
 
 
 </body>

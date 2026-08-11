@@ -12,8 +12,7 @@
 
 <title>Hungry - Grocery</title>
 
-<link rel="stylesheet" href="static/style.css">
-
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
@@ -21,565 +20,587 @@
 
 <!-- NAVBAR -->
 
+```html
+<!-- NAVBAR -->
+
 <div class="navbar">
 
-```
-<div class="logo">
-    🍔 Hungry
+    <div class="logo">
+        🍔 Hungry
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('home') }}">
+            🏠 Home
+        </a>
+
+        <a href="{{ url_for('stores') }}">
+            🍴 Stores
+        </a>
+
+        <a href="{{ url_for('orders') }}">
+            📦 My Orders
+        </a>
+
+        <a href="{{ url_for('cart') }}">
+            🛒 Cart
+
+            {% if session.get("cart_count", 0) > 0 %}
+            <span class="cart-count">
+                {{ session.get("cart_count") }}
+            </span>
+            {% endif %}
+
+        </a>
+
+    </div>
+
 </div>
 
-
-<div class="nav-links">
-
-    <a href="index.html">
-        🏠 Home
-    </a>
-
-    <a href="stores.html">
-        🍴 Stores
-    </a>
-
-    <a href="orders.html">
-        📦 My Orders
-    </a>
-
-    <a href="cart.html">
-        🛒 Cart
-    </a>
-
-</div>
-```
-
-</div>
-
-<h1 class="page-title">
-    🛒 Grocery Store
-</h1>
-
-<p class="subtitle">
-    Daily essentials delivered to your doorstep
-</p>
 
 <div class="menu-container">
 
+
+    <!-- FOOD ESSENTIALS -->
+
+    <div class="category-card">
+
+        <h2>
+            🌾 Food Essentials
+        </h2>
+
+
+        <!-- Rice -->
+
+        <div class="food-card">
+
+            <div class="food-info">
+
+                <h3>Rice</h3>
+
+                <p class="price">₹80</p>
+
+                <p class="food-description">
+                    Premium quality rice.
+                </p>
+
+            </div>
+
+
+            <div class="food-right">
+
+                <div class="food-image-box">
+
+                    <img
+                        src="{{ url_for('static', filename='images/rice.jpg') }}"
+                        class="food-item-image"
+                        alt="Rice"
+                    >
+
+                </div>
+
+
+                <form
+                    action="{{ url_for('add_to_cart') }}"
+                    method="POST"
+                >
+
+                    <input type="hidden" name="food" value="Rice">
+                    <input type="hidden" name="price" value="80">
+                    <input type="hidden" name="category" value="grocery">
+                    <input type="hidden" name="quantity" value="1">
+
+                    <button type="submit" class="add-btn">
+                        Add
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- Wheat Flour -->
+
+        <div class="food-card">
+
+            <div class="food-info">
+
+                <h3>Wheat Flour</h3>
+
+                <p class="price">₹60</p>
+
+                <p class="food-description">
+                    Fresh wheat flour for everyday cooking.
+                </p>
+
+            </div>
+
+
+            <div class="food-right">
+
+                <div class="food-image-box">
+
+                    <img
+                        src="{{ url_for('static', filename='images/wheat_flour.jpg') }}"
+                        class="food-item-image"
+                        alt="Wheat Flour"
+                    >
+
+                </div>
+
+
+                <form action="{{ url_for('add_to_cart') }}" method="POST">
+
+                    <input type="hidden" name="food" value="Wheat Flour">
+                    <input type="hidden" name="price" value="60">
+                    <input type="hidden" name="category" value="grocery">
+                    <input type="hidden" name="quantity" value="1">
+
+                    <button type="submit" class="add-btn">
+                        Add
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- Sugar -->
+
+        <div class="food-card">
+
+            <div class="food-info">
+
+                <h3>Sugar</h3>
+
+                <p class="price">₹50</p>
+
+                <p class="food-description">
+                    Fine quality sugar.
+                </p>
+
+            </div>
+
+
+            <div class="food-right">
+
+                <div class="food-image-box">
+
+                    <img
+                        src="{{ url_for('static', filename='images/sugar.jpg') }}"
+                        class="food-item-image"
+                        alt="Sugar"
+                    >
+
+                </div>
+
+
+                <form action="{{ url_for('add_to_cart') }}" method="POST">
+
+                    <input type="hidden" name="food" value="Sugar">
+                    <input type="hidden" name="price" value="50">
+                    <input type="hidden" name="category" value="grocery">
+                    <input type="hidden" name="quantity" value="1">
+
+                    <button type="submit" class="add-btn">
+                        Add
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- Cooking Oil -->
+
+        <div class="food-card">
+
+            <div class="food-info">
+
+                <h3>Cooking Oil</h3>
+
+                <p class="price">₹150</p>
+
+                <p class="food-description">
+                    Premium cooking oil.
+                </p>
+
+            </div>
+
+
+            <div class="food-right">
+
+                <div class="food-image-box">
+
+                    <img
+                        src="{{ url_for('static', filename='images/cooking_oil.jpg') }}"
+                        class="food-item-image"
+                        alt="Cooking Oil"
+                    >
+
+                </div>
+
+
+                <form action="{{ url_for('add_to_cart') }}" method="POST">
+
+                    <input type="hidden" name="food" value="Cooking Oil">
+                    <input type="hidden" name="price" value="150">
+                    <input type="hidden" name="category" value="grocery">
+                    <input type="hidden" name="quantity" value="1">
+
+                    <button type="submit" class="add-btn">
+                        Add
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- DAIRY -->
+
+    <div class="category-card">
+
+        <h2>
+            🥛 Dairy & Breakfast
+        </h2>
+
+
+        <!-- Milk -->
+
+        <div class="food-card">
+
+            <div class="food-info">
+
+                <h3>Milk</h3>
+
+                <p class="price">₹60</p>
+
+                <p class="food-description">
+                    Fresh dairy milk.
+                </p>
+
+            </div>
+
+
+            <div class="food-right">
+
+                <div class="food-image-box">
+
+                    <img
+                        src="{{ url_for('static', filename='images/milk.jpg') }}"
+                        class="food-item-image"
+                        alt="Milk"
+                    >
+
+                </div>
+
+
+                <form action="{{ url_for('add_to_cart') }}" method="POST">
+
+                    <input type="hidden" name="food" value="Milk">
+                    <input type="hidden" name="price" value="60">
+                    <input type="hidden" name="category" value="grocery">
+                    <input type="hidden" name="quantity" value="1">
+
+                    <button type="submit" class="add-btn">
+                        Add
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- Eggs -->
+
+        <div class="food-card">
+
+            <div class="food-info">
+
+                <h3>Eggs</h3>
+
+                <p class="price">₹90</p>
+
+                <p class="food-description">
+                    Fresh farm eggs.
+                </p>
+
+            </div>
+
+
+            <div class="food-right">
+
+                <div class="food-image-box">
+
+                    <img
+                        src="{{ url_for('static', filename='images/eggs.jpg') }}"
+                        class="food-item-image"
+                        alt="Eggs"
+                    >
+
+                </div>
+
+
+                <form action="{{ url_for('add_to_cart') }}" method="POST">
+
+                    <input type="hidden" name="food" value="Eggs">
+                    <input type="hidden" name="price" value="90">
+                    <input type="hidden" name="category" value="grocery">
+                    <input type="hidden" name="quantity" value="1">
+
+                    <button type="submit" class="add-btn">
+                        Add
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- Bread -->
+
+        <div class="food-card">
+
+            <div class="food-info">
+
+                <h3>Bread</h3>
+
+                <p class="price">₹45</p>
+
+                <p class="food-description">
+                    Soft and fresh bread.
+                </p>
+
+            </div>
+
+
+            <div class="food-right">
+
+                <div class="food-image-box">
+
+                    <img
+                        src="{{ url_for('static', filename='images/bread.jpg') }}"
+                        class="food-item-image"
+                        alt="Bread"
+                    >
+
+                </div>
+
+
+                <form action="{{ url_for('add_to_cart') }}" method="POST">
+
+                    <input type="hidden" name="food" value="Bread">
+                    <input type="hidden" name="price" value="45">
+                    <input type="hidden" name="category" value="grocery">
+                    <input type="hidden" name="quantity" value="1">
+
+                    <button type="submit" class="add-btn">
+                        Add
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- HOUSEHOLD -->
+
+    <div class="category-card">
+
+        <h2>
+            🧴 Household Essentials
+        </h2>
+
+
+        <!-- Shampoo -->
+
+        <div class="food-card">
+
+            <div class="food-info">
+
+                <h3>Shampoo</h3>
+
+                <p class="price">₹180</p>
+
+                <p class="food-description">
+                    Everyday hair care shampoo.
+                </p>
+
+            </div>
+
+
+            <div class="food-right">
+
+                <div class="food-image-box">
+
+                    <img
+                        src="{{ url_for('static', filename='images/shampoo.jpg') }}"
+                        class="food-item-image"
+                        alt="Shampoo"
+                    >
+
+                </div>
+
+
+                <form action="{{ url_for('add_to_cart') }}" method="POST">
+
+                    <input type="hidden" name="food" value="Shampoo">
+                    <input type="hidden" name="price" value="180">
+                    <input type="hidden" name="category" value="grocery">
+                    <input type="hidden" name="quantity" value="1">
+
+                    <button type="submit" class="add-btn">
+                        Add
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- Toothpaste -->
+
+        <div class="food-card">
+
+            <div class="food-info">
+
+                <h3>Toothpaste</h3>
+
+                <p class="price">₹100</p>
+
+                <p class="food-description">
+                    Complete oral care toothpaste.
+                </p>
+
+            </div>
+
+
+            <div class="food-right">
+
+                <div class="food-image-box">
+
+                    <img
+                        src="{{ url_for('static', filename='images/toothpaste.jpg') }}"
+                        class="food-item-image"
+                        alt="Toothpaste"
+                    >
+
+                </div>
+
+
+                <form action="{{ url_for('add_to_cart') }}" method="POST">
+
+                    <input type="hidden" name="food" value="Toothpaste">
+                    <input type="hidden" name="price" value="100">
+                    <input type="hidden" name="category" value="grocery">
+                    <input type="hidden" name="quantity" value="1">
+
+                    <button type="submit" class="add-btn">
+                        Add
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- Detergent -->
+
+        <div class="food-card">
+
+            <div class="food-info">
+
+                <h3>Detergent</h3>
+
+                <p class="price">₹140</p>
+
+                <p class="food-description">
+                    Powerful everyday laundry detergent.
+                </p>
+
+            </div>
+
+
+            <div class="food-right">
+
+                <div class="food-image-box">
+
+                    <img
+                        src="{{ url_for('static', filename='images/detergent.jpg') }}"
+                        class="food-item-image"
+                        alt="Detergent"
+                    >
+
+                </div>
+
+
+                <form action="{{ url_for('add_to_cart') }}" method="POST">
+
+                    <input type="hidden" name="food" value="Detergent">
+                    <input type="hidden" name="price" value="140">
+                    <input type="hidden" name="category" value="grocery">
+                    <input type="hidden" name="quantity" value="1">
+
+                    <button type="submit" class="add-btn">
+                        Add
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- BOTTOM BUTTONS -->
+
+    <div class="bottom-buttons">
+
+        <a
+            href="{{ url_for('cart') }}"
+            class="view-cart-btn"
+        >
+            🛒 View Cart
+        </a>
+
+
+        <a
+            href="{{ url_for('stores') }}"
+            class="home-link"
+        >
+            ← Back To Stores
+        </a>
+
+    </div>
+
+</div>
 ```
-<!-- FOOD ESSENTIALS -->
-
-<div class="category-card">
-
-    <h2>
-        🌾 Food Essentials
-    </h2>
-
-
-    <!-- Rice -->
-
-    <div class="food-card">
-
-        <div class="food-info">
-
-            <h3>
-                Rice
-            </h3>
-
-            <p class="price">
-                ₹80
-            </p>
-
-            <p class="food-description">
-                Premium quality rice.
-            </p>
-
-        </div>
-
-
-        <div class="food-right">
-
-            <div class="food-image-box">
-
-                <img
-                    src="static/images/rice.jpg"
-                    class="food-item-image"
-                    alt="Rice"
-                >
-
-            </div>
-
-
-            <button
-                class="add-btn"
-                onclick="addToCart('Rice',80)"
-            >
-                Add
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- Wheat Flour -->
-
-    <div class="food-card">
-
-        <div class="food-info">
-
-            <h3>
-                Wheat Flour
-            </h3>
-
-            <p class="price">
-                ₹60
-            </p>
-
-            <p class="food-description">
-                Fresh wheat flour for everyday cooking.
-            </p>
-
-        </div>
-
-
-        <div class="food-right">
-
-            <div class="food-image-box">
-
-                <img
-                    src="static/images/wheat_flour.jpg"
-                    class="food-item-image"
-                    alt="Wheat Flour"
-                >
-
-            </div>
-
-
-            <button
-                class="add-btn"
-                onclick="addToCart('Wheat Flour',60)"
-            >
-                Add
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- Sugar -->
-
-    <div class="food-card">
-
-        <div class="food-info">
-
-            <h3>
-                Sugar
-            </h3>
-
-            <p class="price">
-                ₹50
-            </p>
-
-            <p class="food-description">
-                Fine quality sugar.
-            </p>
-
-        </div>
-
-
-        <div class="food-right">
-
-            <div class="food-image-box">
-
-                <img
-                    src="static/images/sugar.jpg"
-                    class="food-item-image"
-                    alt="Sugar"
-                >
-
-            </div>
-
-
-            <button
-                class="add-btn"
-                onclick="addToCart('Sugar',50)"
-            >
-                Add
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- Cooking Oil -->
-
-    <div class="food-card">
-
-        <div class="food-info">
-
-            <h3>
-                Cooking Oil
-            </h3>
-
-            <p class="price">
-                ₹150
-            </p>
-
-            <p class="food-description">
-                Premium cooking oil.
-            </p>
-
-        </div>
-
-
-        <div class="food-right">
-
-            <div class="food-image-box">
-
-                <img
-                    src="static/images/cooking_oil.jpg"
-                    class="food-item-image"
-                    alt="Cooking Oil"
-                >
-
-            </div>
-
-
-            <button
-                class="add-btn"
-                onclick="addToCart('Cooking Oil',150)"
-            >
-                Add
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- DAIRY -->
-
-<div class="category-card">
-
-    <h2>
-        🥛 Dairy & Breakfast
-    </h2>
-
-
-    <!-- Milk -->
-
-    <div class="food-card">
-
-        <div class="food-info">
-
-            <h3>
-                Milk
-            </h3>
-
-            <p class="price">
-                ₹60
-            </p>
-
-            <p class="food-description">
-                Fresh dairy milk.
-            </p>
-
-        </div>
-
-
-        <div class="food-right">
-
-            <div class="food-image-box">
-
-                <img
-                    src="static/images/milk.jpg"
-                    class="food-item-image"
-                    alt="Milk"
-                >
-
-            </div>
-
-
-            <button
-                class="add-btn"
-                onclick="addToCart('Milk',60)"
-            >
-                Add
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- Eggs -->
-
-    <div class="food-card">
-
-        <div class="food-info">
-
-            <h3>
-                Eggs
-            </h3>
-
-            <p class="price">
-                ₹90
-            </p>
-
-            <p class="food-description">
-                Fresh farm eggs.
-            </p>
-
-        </div>
-
-
-        <div class="food-right">
-
-            <div class="food-image-box">
-
-                <img
-                    src="static/images/eggs.jpg"
-                    class="food-item-image"
-                    alt="Eggs"
-                >
-
-            </div>
-
-
-            <button
-                class="add-btn"
-                onclick="addToCart('Eggs',90)"
-            >
-                Add
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- Bread -->
-
-    <div class="food-card">
-
-        <div class="food-info">
-
-            <h3>
-                Bread
-            </h3>
-
-            <p class="price">
-                ₹45
-            </p>
-
-            <p class="food-description">
-                Soft and fresh bread.
-            </p>
-
-        </div>
-
-
-        <div class="food-right">
-
-            <div class="food-image-box">
-
-                <img
-                    src="static/images/bread.jpg"
-                    class="food-item-image"
-                    alt="Bread"
-                >
-
-            </div>
-
-
-            <button
-                class="add-btn"
-                onclick="addToCart('Bread',45)"
-            >
-                Add
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- HOUSEHOLD -->
-
-<div class="category-card">
-
-    <h2>
-        🧴 Household Essentials
-    </h2>
-
-
-    <!-- Shampoo -->
-
-    <div class="food-card">
-
-        <div class="food-info">
-
-            <h3>
-                Shampoo
-            </h3>
-
-            <p class="price">
-                ₹180
-            </p>
-
-            <p class="food-description">
-                Everyday hair care shampoo.
-            </p>
-
-        </div>
-
-
-        <div class="food-right">
-
-            <div class="food-image-box">
-
-                <img
-                    src="static/images/shampoo.jpg"
-                    class="food-item-image"
-                    alt="Shampoo"
-                >
-
-            </div>
-
-
-            <button
-                class="add-btn"
-                onclick="addToCart('Shampoo',180)"
-            >
-                Add
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- Toothpaste -->
-
-    <div class="food-card">
-
-        <div class="food-info">
-
-            <h3>
-                Toothpaste
-            </h3>
-
-            <p class="price">
-                ₹100
-            </p>
-
-            <p class="food-description">
-                Complete oral care toothpaste.
-            </p>
-
-        </div>
-
-
-        <div class="food-right">
-
-            <div class="food-image-box">
-
-                <img
-                    src="static/images/toothpaste.jpg"
-                    class="food-item-image"
-                    alt="Toothpaste"
-                >
-
-            </div>
-
-
-            <button
-                class="add-btn"
-                onclick="addToCart('Toothpaste',100)"
-            >
-                Add
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- Detergent -->
-
-    <div class="food-card">
-
-        <div class="food-info">
-
-            <h3>
-                Detergent
-            </h3>
-
-            <p class="price">
-                ₹140
-            </p>
-
-            <p class="food-description">
-                Powerful everyday laundry detergent.
-            </p>
-
-        </div>
-
-
-        <div class="food-right">
-
-            <div class="food-image-box">
-
-                <img
-                    src="static/images/detergent.jpg"
-                    class="food-item-image"
-                    alt="Detergent"
-                >
-
-            </div>
-
-
-            <button
-                class="add-btn"
-                onclick="addToCart('Detergent',140)"
-            >
-                Add
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-```
-
-</div>
-
-<!-- BOTTOM BUTTONS -->
-
-<div class="bottom-buttons">
-
-```
-<a
-    href="cart.html"
-    class="view-cart-btn"
->
-    🛒 View Cart
-</a>
-
-
-<a
-    href="stores.html"
-    class="home-link"
->
-    ← Back To Stores
-</a>
-```
-
-</div>
 
 <script>
 

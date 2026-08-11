@@ -1,487 +1,287 @@
+```html
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
 
-```
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<title>Hungry - Cart</title>
+    <title>Hungry - Cart</title>
 
-<link rel="stylesheet" href="static/style.css">
-```
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
+
 <body>
 
-<div class="navbar">
+    <!-- =========================
+         NAVBAR
+    ========================== -->
 
-```
-<div class="logo">
-    🍔 Hungry
-</div>
+    <div class="navbar">
 
+        <div class="logo">
+            🍔 Hungry
+        </div>
 
-<div class="nav-links">
 
-    <a href="index.html">
-        🏠 Home
-    </a>
+        <div class="nav-links">
 
-    <a href="stores.html">
-        🍴 Stores
-    </a>
+            <a href="{{ url_for('home') }}">
+                🏠 Home
+            </a>
 
-    <a href="food_menu.html">
-        🍽️ Menu
-    </a>
 
-    <a href="orders.html">
-        📦 My Orders
-    </a>
+            <a href="{{ url_for('show_stores') }}">
+                🍴 Stores
+            </a>
 
-    <a href="cart.html" class="active">
-        🛒 Cart
 
-        <span
-            id="cart-count"
-            class="cart-count"
-        >
-            0
-        </span>
+            <a href="{{ url_for('orders') }}">
+                📦 My Orders
+            </a>
 
-    </a>
 
-</div>
-```
+            <a href="{{ url_for('cart') }}"
+               class="active">
 
-</div>
+                🛒 Cart
 
+                {% if session.get("cart_count", 0) > 0 %}
 
-<h1 class="cart-title">
-    🛒 Your Cart
-</h1>
+                    <span class="cart-count">
+                        {{ session.get("cart_count") }}
+                    </span>
 
-<div
-    id="cart-container"
-    class="cart-container"
->
-</div>
+                {% endif %}
 
+            </a>
 
-<script>
+        </div>
 
+    </div>
 
-/* ========================= */
-/* GET CART */
-/* ========================= */
 
 
-function getCart() {
+    <!-- =========================
+         CART PAGE
+    ========================== -->
 
+    <div class="cart-container">
 
-    return JSON.parse(
-        localStorage.getItem(
-            "hungryCart"
-        )
-    ) || [];
 
-}
+        <h1 class="cart-title">
+            🛒 Your Cart
+        </h1>
 
 
-/* ========================= */
-/* SAVE CART */
-/* ========================= */
+        <p class="cart-subtitle">
+            Review your items before checkout
+        </p>
 
 
-function saveCart(cart) {
 
+        {% if items %}
 
-    localStorage.setItem(
-        "hungryCart",
-        JSON.stringify(cart)
-    );
 
-}
+            <!-- =========================
+                 CART ITEMS
+            ========================== -->
 
+            <div class="cart-items">
 
-/* ========================= */
-/* UPDATE CART COUNT */
-/* ========================= */
 
+                {% for item in items %}
 
-function updateCartCount(cart) {
 
+                    <div class="cart-card">
 
-    let count = 0;
 
+                        <!-- FOOD INFORMATION -->
 
-    cart.forEach(function(item) {
+                        <div class="cart-food-info">
 
 
-        count +=
-            Number(item.quantity) || 1;
+                            <div class="food-icon">
+                                🍽️
+                            </div>
 
-    });
 
+                            <div>
 
-    document.getElementById(
-        "cart-count"
-    ).innerText = count;
+                                <h3>
+                                    {{ item["food"] }}
+                                </h3>
 
-}
 
+                                <p>
+                                    ₹{{ item["price"] }} per item
+                                </p>
 
-/* ========================= */
-/* INCREASE */
-/* ========================= */
+                            </div>
 
 
-function increaseQuantity(index) {
+                        </div>
 
 
-    let cart = getCart();
 
+                        <!-- QUANTITY -->
 
-    cart[index].quantity =
-        (Number(cart[index].quantity) || 1) + 1;
+                        <div class="quantity-box">
 
+                            Qty :
 
-    saveCart(cart);
+                            <strong>
+                                {{ item["quantity"] }}
+                            </strong>
 
+                        </div>
 
-    displayCart();
 
-}
 
+                        <!-- ITEM TOTAL -->
 
-/* ========================= */
-/* DECREASE */
-/* ========================= */
+                        <div class="item-total">
 
+                            ₹{{ item["price"] * item["quantity"] }}
 
-function decreaseQuantity(index) {
+                        </div>
 
 
-    let cart = getCart();
+                    </div>
 
 
-    let quantity =
-        Number(cart[index].quantity) || 1;
+                {% endfor %}
 
 
-    if (quantity > 1) {
+            </div>
 
 
-        cart[index].quantity =
-            quantity - 1;
 
+            <!-- =========================
+                 BILL SUMMARY
+            ========================== -->
 
-    } else {
+            <div class="bill-box">
 
 
-        cart.splice(index, 1);
+                <h2>
+                    🧾 Bill Summary
+                </h2>
 
-    }
 
+                <p>
 
-    saveCart(cart);
+                    <span>
+                        Items Total
+                    </span>
 
+                    <span>
+                        ₹{{ grand_total }}
+                    </span>
 
-    displayCart();
+                </p>
 
-}
 
+                <p>
 
-/* ========================= */
-/* REMOVE */
-/* ========================= */
+                    <span>
+                        Delivery Fee
+                    </span>
 
+                    <span>
+                        Included
+                    </span>
 
-function removeItem(index) {
+                </p>
 
 
-    let cart = getCart();
+                <hr>
 
 
-    cart.splice(index, 1);
+                <p class="grand-total">
 
+                    <span>
+                        Grand Total
+                    </span>
 
-    saveCart(cart);
+                    <span>
+                        ₹{{ grand_total }}
+                    </span>
 
+                </p>
 
-    displayCart();
 
-}
+                <a
+                    class="checkout-btn"
+                    href="{{ url_for('checkout') }}"
+                >
+                    ✅ Proceed To Checkout
+                </a>
 
 
-/* ========================= */
-/* DISPLAY CART */
-/* ========================= */
+            </div>
 
 
-function displayCart() {
 
+            <!-- =========================
+                 CONTINUE SHOPPING
+            ========================== -->
 
-    let cart = getCart();
+            <a
+                class="continue-btn"
+                href="{{ url_for('show_stores') }}"
+            >
+                ← Continue Shopping
+            </a>
 
 
-    let container =
-        document.getElementById(
-            "cart-container"
-        );
+        {% else %}
 
 
-    updateCartCount(cart);
-
-
-    /* EMPTY CART */
-
-
-    if (cart.length === 0) {
-
-
-        container.innerHTML = `
+            <!-- =========================
+                 EMPTY CART
+            ========================== -->
 
             <div class="empty-cart">
+
 
                 <div class="empty-cart-icon">
                     🛒
                 </div>
 
+
                 <h2>
                     Your Cart Is Empty
                 </h2>
 
+
                 <p>
-                    Add something delicious to your cart!
+                    Looks like you haven't added anything yet.
                 </p>
 
-                <a href="stores.html">
+
+                <a href="{{ url_for('show_stores') }}">
                     Start Ordering
                 </a>
 
-            </div>
-
-        `;
-
-
-        return;
-
-    }
-
-
-    let subtotal = 0;
-
-
-    let itemsHTML = "";
-
-
-    cart.forEach(function(item, index) {
-
-
-        let price =
-            Number(item.price) || 0;
-
-
-        let quantity =
-            Number(item.quantity) || 1;
-
-
-        let total =
-            price * quantity;
-
-
-        subtotal += total;
-
-
-        itemsHTML += `
-
-            <div class="cart-card">
-
-
-                <div class="cart-food-info">
-
-
-                    <div class="food-icon">
-                        🛍️
-                    </div>
-
-
-                    <div>
-
-                        <h2>
-                            ${item.food}
-                        </h2>
-
-
-                        <p>
-                            ₹${price} each
-                        </p>
-
-
-                    </div>
-
-
-                </div>
-
-
-                <div
-                    class="quantity-box"
-                >
-
-                    <button
-                        onclick="decreaseQuantity(${index})"
-                        style="
-                            border:none;
-                            background:none;
-                            cursor:pointer;
-                            font-size:20px;
-                        "
-                    >
-                        −
-                    </button>
-
-
-                    ${quantity}
-
-
-                    <button
-                        onclick="increaseQuantity(${index})"
-                        style="
-                            border:none;
-                            background:none;
-                            cursor:pointer;
-                            font-size:20px;
-                        "
-                    >
-                        +
-                    </button>
-
-                </div>
-
-
-                <div class="item-total">
-
-                    ₹${total}
-
-                </div>
-
-
-                <button
-                    onclick="removeItem(${index})"
-                    style="
-                        border:none;
-                        background:#ffe5dc;
-                        color:#ff5200;
-                        padding:8px 12px;
-                        border-radius:20px;
-                        cursor:pointer;
-                    "
-                >
-                    Remove
-                </button>
-
 
             </div>
 
-        `;
 
-    });
-
-
-    let deliveryFee = 40;
+        {% endif %}
 
 
-    let grandTotal =
-        subtotal + deliveryFee;
+    </div>
 
-
-    container.innerHTML = `
-
-        ${itemsHTML}
-
-
-        <div class="bill-box">
-
-
-            <h2>
-                🧾 Bill Details
-            </h2>
-
-
-            <p>
-
-                <span>
-                    Subtotal
-                </span>
-
-                <span>
-                    ₹${subtotal}
-                </span>
-
-            </p>
-
-
-            <p>
-
-                <span>
-                    Delivery Fee
-                </span>
-
-                <span>
-                    ₹${deliveryFee}
-                </span>
-
-            </p>
-
-
-            <p class="grand-total">
-
-                <span>
-                    Grand Total
-                </span>
-
-                <span>
-                    ₹${grandTotal}
-                </span>
-
-            </p>
-
-
-            <a
-                href="checkout.html"
-                class="checkout-btn"
-            >
-                Proceed To Checkout
-            </a>
-
-
-        </div>
-
-
-        <a
-            href="stores.html"
-            class="continue-btn"
-        >
-            ← Continue Shopping
-        </a>
-
-    `;
-
-}
-
-
-displayCart();
-
-
-</script>
 
 </body>
 
 </html>
+```
+

@@ -1,10 +1,11 @@
-from flask import Flask, render_template,request, session,redirect
+from flask import Flask, render_template, request, session, redirect, url_for
 from delivery import stores
 import random
+import os
 
 
 app = Flask(__name__)
-app.secret_key = "hungry_secret_key"
+app.secret_key = os.environ.get("SECRET_KEY", "temporary-secret-key")
 
 @app.route("/")
 def home():
@@ -72,51 +73,161 @@ def add_to_cart():
     quantity = int(request.form["quantity"])
     store_id = request.form["store_id"]
 
+    # -----------------------------
+    # CHECK STORE
+    # -----------------------------
+
     if "store_id" not in session:
+
         session["store_id"] = store_id
+
+    else:
+
+        if session["store_id"] != store_id:
+
+            return render_template("restaurant_warning.html")
+
+
+    # -----------------------------
+    # GET CART
+    # -----------------------------
 
     cart = session.get("cart", [])
 
     item_exists = False
 
+
+    # -----------------------------
+    # CHECK EXISTING ITEM
+    # -----------------------------
+
     for item in cart:
-        if item["food"] == food and item.get("store_id") == store_id:
+
+        if (
+            item["food"] == food
+            and item["store_id"] == store_id
+        ):
+
             item["quantity"] += quantity
+
             item_exists = True
+
             break
 
-    if not item_exists:
-        item = {
-            "food": food,
-            "price": price,
-            "quantity": quantity,
-            "store_id" : store_id
-        }
 
-        cart.append(item)
+    # -----------------------------
+    # ADD NEW ITEM
+    # -----------------------------
+
+    if not item_exists:
+
+        cart.append({
+
+            "food": food,
+
+            "price": price,
+
+            "quantity": quantity,
+
+            "store_id": store_id
+
+        })
+
+
+    # -----------------------------
+    # SAVE CART
+    # -----------------------------
 
     session["cart"] = cart
 
     session["cart_count"] = sum(
-         item["quantity"] for item in cart
-        )
+        item["quantity"]
+        for item in cart
+    )
 
-    return redirect(f"/menu/{store_id}")
+    session.modified = True
 
+
+    return redirect(
+        url_for("menu", store_id=store_id)
+    )
 @app.route("/cart")
 def cart():
 
     items = session.get("cart", [])
 
-    grand_total = 0
+    if not items:
+        return render_template(
+            "cart.html",
+            items=[],
+            grand_total=0,
+            delivery_fee=0,
+            items_total=0
+        )
+
+
+    # -----------------------------
+    # ITEMS TOTAL
+    # -----------------------------
+
+    items_total = 0
 
     for item in items:
-        grand_total += item["price"] * item["quantity"]
+
+        items_total += (
+            item["price"] *
+            item["quantity"]
+        )
+
+
+    # -----------------------------
+    # FIND STORE
+    # -----------------------------
+
+    store_id = session.get("store_id")
+
+    selected_store = None
+
+    for store in stores:
+
+        if str(store.store_id) == str(store_id):
+
+            selected_store = store
+
+            break
+
+
+    # -----------------------------
+    # DELIVERY FEE
+    # -----------------------------
+
+    delivery_fee = 0
+
+    if selected_store:
+
+        delivery_fee = selected_store.delivery_fee
+
+
+    # -----------------------------
+    # FINAL TOTAL
+    # -----------------------------
+
+    grand_total = items_total + delivery_fee
+
 
     return render_template(
+
         "cart.html",
+
         items=items,
-        grand_total=grand_total
+
+        items_total=items_total,
+
+        delivery_fee=delivery_fee,
+
+        grand_total=grand_total,
+
+        store=selected_store
     )
 
 @app.route("/clear_cart")
@@ -136,16 +247,60 @@ def checkout():
     if not items:
         return redirect("/stores")
 
-    grand_total = 0
+
+    # -----------------------------
+    # ITEMS TOTAL
+    # -----------------------------
+
+    items_total = 0
 
     for item in items:
-        grand_total += item["price"] * item["quantity"]
+
+        items_total += (
+            item["price"] *
+            item["quantity"]
+        )
+
+
+    # -----------------------------
+    # FIND STORE
+    # -----------------------------
+
+    store_id = session.get("store_id")
+
+    selected_store = None
+
+    for store in stores:
+
+        if str(store.store_id) == str(store_id):
+
+            selected_store = store
+
+            break
+
+
+    delivery_fee = 0
+
+    if selected_store:
+
+        delivery_fee = selected_store.delivery_fee
+
+
+    grand_total = items_total + delivery_fee
 
 
     return render_template(
+
         "checkout.html",
+
         items=items,
+
+        items_total=items_total,
+
+        delivery_fee=delivery_fee,
+
         grand_total=grand_total
+        
     )
 @app.route("/place_order", methods=["POST"])
 def place_order():
@@ -287,4 +442,4 @@ def search_food():
     )
 
 if __name__ == "__main__":
-    app.run(debug=True) 
+    app.run() 

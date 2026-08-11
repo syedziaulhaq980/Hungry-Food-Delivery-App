@@ -1,95 +1,156 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 
 <head>
 
-<title>Order Success</title>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Hungry - Order Success</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+
 
 </head>
 
+<body class="success-page">
 
-<body>
+```
+<!-- NAVBAR -->
 
+<div class="navbar">
 
-<div class="success-box">
-
-
-<h1>
-🎉 Order Placed Successfully!
-</h1>
-
-
-<h2>
-Thank you {{order["name"]}} ❤️
-</h2>
-
-<h2>
-Order ID:
-{{order["order_id"]}}
-</h2>
+    <div class="logo">
+        🍔 Hungry
+    </div>
 
 
-<p>
-Your food is being prepared 🍳
-</p>
+    <div class="nav-links">
 
+        <a href="{{ url_for('home') }}">
+            🏠 Home
+        </a>
 
-<p>
-🚚 Delivery will arrive soon
-</p>
+        <a href="{{ url_for('show_stores') }}">
+            🍴 Stores
+        </a>
 
+        <a href="{{ url_for('orders') }}">
+            📦 My Orders
+        </a>
 
-<hr>
+        <a href="{{ url_for('cart') }}">
+            🛒 Cart
+        </a>
 
-
-<h3>
-Order Summary
-</h3>
-
-
-{% for item in order["items"] %}
-
-<p>
-{{item["food"]}} × {{item["quantity"]}}
--
-₹{{item["price"] * item["quantity"]}}
-</p>
-
-
-{% endfor %}
-
-
-
-<h2>
-
-Total:
-₹{{order["total"]}}
-
-</h2>
-
-
-
-<p>
-Payment:
-{{order["payment"]}}
-</p>
-
-
-
-<a href="/stores">
-
-🍔 Order More Food
-
-</a>
-
+    </div>
 
 </div>
 
 
 
+<!-- ORDER SUCCESS -->
+
+<div class="success-container">
+
+
+    <h1>
+        🎉 Order Placed Successfully!
+    </h1>
+
+
+    <p>
+        📍 Delivery Address:
+        {{ order["address"] }}
+    </p>
+
+
+    <a
+        href="https://www.google.com/maps/search/?api=1&query={{ order['address']|urlencode }}"
+        target="_blank"
+        class="map-btn"
+    >
+        🗺️ View Delivery Location
+    </a>
+
+
+    <h2>
+        Thank you {{ order["name"] }} ❤️
+    </h2>
+
+
+    <h2>
+        Order ID:
+        {{ order["order_id"] }}
+    </h2>
+
+
+    <p>
+        Your order is being prepared 🍳
+    </p>
+
+
+    <p>
+        🚚 Delivery will arrive soon
+    </p>
+
+
+    <hr>
+
+
+    <h2>
+        🧾 Order Summary
+    </h2>
+
+
+    {% for item in order["items"] %}
+
+    <p>
+
+        {{ item["food"] }}
+
+        ×
+
+        {{ item["quantity"] }}
+
+        -
+
+        ₹{{ item["price"] * item["quantity"] }}
+
+    </p>
+
+    {% endfor %}
+
+
+    <h2>
+        Total:
+        ₹{{ order["total"] }}
+    </h2>
+
+
+    <p>
+        Payment:
+        {{ order["payment"] }}
+    </p>
+
+
+    <a
+        href="{{ url_for('show_stores') }}"
+        class="explore-btn"
+    >
+        🍔 Order More Food
+    </a>
+
+
+</div>
+```
+
 </body>
 
 </html>
+

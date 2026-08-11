@@ -12,15 +12,17 @@
 
 <title>Hungry - Food Menu</title>
 
-<link rel="stylesheet" href="static/style.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 
 </head>
 
 <body>
 
-<div class="navbar">
+```html
+<!-- NAVBAR -->
 
+<div class="navbar">
 
     <div class="logo">
         🍔 Hungry
@@ -28,344 +30,404 @@
 
     <div class="nav-links">
 
-        <a href="index.html">
+        <a href="{{ url_for('home') }}">
             🏠 Home
         </a>
 
-        <a href="stores.html">
+        <a href="{{ url_for('stores') }}">
             🍴 Stores
         </a>
 
-        <a href="orders.html">
+        <a href="{{ url_for('orders') }}">
             📦 My Orders
         </a>
 
-        <a href="cart.html">
+        <a href="{{ url_for('cart') }}">
             🛒 Cart
+
+            {% if session.get("cart_count", 0) > 0 %}
+            <span class="cart-count">
+                {{ session.get("cart_count") }}
+            </span>
+            {% endif %}
+
         </a>
 
     </div>
 
-
 </div>
 
-<h1 class="page-title">
-    🍽️ Food Menu
-</h1>
-
-<p class="subtitle">
-    Delicious food delivered to your doorstep
-</p>
 
 <div class="menu-container">
 
 
-<div class="category-card">
+    <!-- NON-VEGETARIAN -->
 
-    <h2>
-        🍗 Non-Vegetarian
-    </h2>
+    <div class="category-card">
 
-
-    <div class="food-card">
-
-        <div class="food-info">
-
-            <h3>
-                Chicken Biryani
-            </h3>
-
-            <p class="price">
-                ₹220
-            </p>
-
-            <p class="food-description">
-                Aromatic basmati rice with delicious chicken.
-            </p>
-
-        </div>
+        <h2>
+            🍗 Non-Vegetarian
+        </h2>
 
 
-        <div class="food-right">
+        <div class="food-card">
 
-            <div class="food-image-box">
+            <div class="food-info">
 
-                <img
-                    src="static/images/chicken_biryani.jpg"
-                    class="food-item-image"
-                    alt="Chicken Biryani"
-                >
+                <h3>
+                    Chicken Biryani
+                </h3>
+
+                <p class="price">
+                    ₹220
+                </p>
+
+                <p class="food-description">
+                    Aromatic basmati rice with delicious chicken.
+                </p>
 
             </div>
 
 
-            <button
-                class="add-btn"
-                onclick="addToCart('Chicken Biryani',220)"
-            >
-                Add
-            </button>
+            <div class="food-right">
+
+                <div class="food-image-box">
+
+                    <img
+                        src="{{ url_for('static', filename='images/chicken_biryani.jpg') }}"
+                        class="food-item-image"
+                        alt="Chicken Biryani"
+                    >
+
+                </div>
+
+
+                <form action="{{ url_for('add_to_cart') }}" method="POST">
+
+                    <input
+                        type="hidden"
+                        name="food"
+                        value="Chicken Biryani"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="price"
+                        value="220"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="category"
+                        value="restaurant"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="quantity"
+                        value="1"
+                    >
+
+                    <button
+                        type="submit"
+                        class="add-btn"
+                    >
+                        Add
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <div class="food-card">
+
+            <div class="food-info">
+
+                <h3>
+                    Butter Chicken
+                </h3>
+
+                <p class="price">
+                    ₹280
+                </p>
+
+                <p class="food-description">
+                    Creamy and rich Indian butter chicken.
+                </p>
+
+            </div>
+
+
+            <div class="food-right">
+
+                <div class="food-image-box">
+
+                    <img
+                        src="{{ url_for('static', filename='images/butter_chicken.jpg') }}"
+                        class="food-item-image"
+                        alt="Butter Chicken"
+                    >
+
+                </div>
+
+
+                <form action="{{ url_for('add_to_cart') }}" method="POST">
+
+                    <input type="hidden" name="food" value="Butter Chicken">
+                    <input type="hidden" name="price" value="280">
+                    <input type="hidden" name="category" value="restaurant">
+                    <input type="hidden" name="quantity" value="1">
+
+                    <button type="submit" class="add-btn">
+                        Add
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <div class="food-card">
+
+            <div class="food-info">
+
+                <h3>
+                    Chicken Tikka
+                </h3>
+
+                <p class="price">
+                    ₹240
+                </p>
+
+                <p class="food-description">
+                    Juicy grilled chicken tikka.
+                </p>
+
+            </div>
+
+
+            <div class="food-right">
+
+                <div class="food-image-box">
+
+                    <img
+                        src="{{ url_for('static', filename='images/chicken_tikka.jpg') }}"
+                        class="food-item-image"
+                        alt="Chicken Tikka"
+                    >
+
+                </div>
+
+
+                <form action="{{ url_for('add_to_cart') }}" method="POST">
+
+                    <input type="hidden" name="food" value="Chicken Tikka">
+                    <input type="hidden" name="price" value="240">
+                    <input type="hidden" name="category" value="restaurant">
+                    <input type="hidden" name="quantity" value="1">
+
+                    <button type="submit" class="add-btn">
+                        Add
+                    </button>
+
+                </form>
+
+            </div>
 
         </div>
 
     </div>
 
 
-    <div class="food-card">
+    <!-- VEGETARIAN -->
 
-        <div class="food-info">
+    <div class="category-card">
 
-            <h3>
-                Butter Chicken
-            </h3>
-
-            <p class="price">
-                ₹280
-            </p>
-
-            <p class="food-description">
-                Creamy and rich Indian butter chicken.
-            </p>
-
-        </div>
+        <h2>
+            🥗 Vegetarian
+        </h2>
 
 
-        <div class="food-right">
+        <div class="food-card">
 
-            <div class="food-image-box">
+            <div class="food-info">
 
-                <img
-                    src="static/images/butter_chicken.jpg"
-                    class="food-item-image"
-                    alt="Butter Chicken"
-                >
+                <h3>
+                    Paneer Tikka
+                </h3>
+
+                <p class="price">
+                    ₹200
+                </p>
+
+                <p class="food-description">
+                    Grilled paneer with Indian spices.
+                </p>
 
             </div>
 
 
-            <button
-                class="add-btn"
-                onclick="addToCart('Butter Chicken',280)"
-            >
-                Add
-            </button>
+            <div class="food-right">
+
+                <div class="food-image-box">
+
+                    <img
+                        src="{{ url_for('static', filename='images/paneer_tikka.jpg') }}"
+                        class="food-item-image"
+                        alt="Paneer Tikka"
+                    >
+
+                </div>
+
+
+                <form action="{{ url_for('add_to_cart') }}" method="POST">
+
+                    <input type="hidden" name="food" value="Paneer Tikka">
+                    <input type="hidden" name="price" value="200">
+                    <input type="hidden" name="category" value="restaurant">
+                    <input type="hidden" name="quantity" value="1">
+
+                    <button type="submit" class="add-btn">
+                        Add
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <div class="food-card">
+
+            <div class="food-info">
+
+                <h3>
+                    Veg Biryani
+                </h3>
+
+                <p class="price">
+                    ₹180
+                </p>
+
+                <p class="food-description">
+                    Fragrant rice cooked with fresh vegetables.
+                </p>
+
+            </div>
+
+
+            <div class="food-right">
+
+                <div class="food-image-box">
+
+                    <img
+                        src="{{ url_for('static', filename='images/veg_biryani.jpg') }}"
+                        class="food-item-image"
+                        alt="Veg Biryani"
+                    >
+
+                </div>
+
+
+                <form action="{{ url_for('add_to_cart') }}" method="POST">
+
+                    <input type="hidden" name="food" value="Veg Biryani">
+                    <input type="hidden" name="price" value="180">
+                    <input type="hidden" name="category" value="restaurant">
+                    <input type="hidden" name="quantity" value="1">
+
+                    <button type="submit" class="add-btn">
+                        Add
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <div class="food-card">
+
+            <div class="food-info">
+
+                <h3>
+                    Dal Makhani
+                </h3>
+
+                <p class="price">
+                    ₹160
+                </p>
+
+                <p class="food-description">
+                    Rich creamy black lentils.
+                </p>
+
+            </div>
+
+
+            <div class="food-right">
+
+                <div class="food-image-box">
+
+                    <img
+                        src="{{ url_for('static', filename='images/dal_makhani.jpg') }}"
+                        class="food-item-image"
+                        alt="Dal Makhani"
+                    >
+
+                </div>
+
+
+                <form action="{{ url_for('add_to_cart') }}" method="POST">
+
+                    <input type="hidden" name="food" value="Dal Makhani">
+                    <input type="hidden" name="price" value="160">
+                    <input type="hidden" name="category" value="restaurant">
+                    <input type="hidden" name="quantity" value="1">
+
+                    <button type="submit" class="add-btn">
+                        Add
+                    </button>
+
+                </form>
+
+            </div>
 
         </div>
 
     </div>
 
 
-    <div class="food-card">
+    <!-- BOTTOM BUTTONS -->
 
-        <div class="food-info">
+    <div class="bottom-buttons">
 
-            <h3>
-                Chicken Tikka
-            </h3>
-
-            <p class="price">
-                ₹240
-            </p>
-
-            <p class="food-description">
-                Juicy grilled chicken tikka.
-            </p>
-
-        </div>
+        <a
+            href="{{ url_for('cart') }}"
+            class="view-cart-btn"
+        >
+            🛒 View Cart
+        </a>
 
 
-        <div class="food-right">
-
-            <div class="food-image-box">
-
-                <img
-                    src="static/images/chicken_tikka.jpg"
-                    class="food-item-image"
-                    alt="Chicken Tikka"
-                >
-
-            </div>
-
-
-            <button
-                class="add-btn"
-                onclick="addToCart('Chicken Tikka',240)"
-            >
-                Add
-            </button>
-
-        </div>
+        <a
+            href="{{ url_for('stores') }}"
+            class="home-link"
+        >
+            ← Back To Stores
+        </a>
 
     </div>
-
-
-</div>
-
-
-<div class="category-card">
-
-    <h2>
-        🥗 Vegetarian
-    </h2>
-
-
-    <div class="food-card">
-
-        <div class="food-info">
-
-            <h3>
-                Paneer Tikka
-            </h3>
-
-            <p class="price">
-                ₹200
-            </p>
-
-            <p class="food-description">
-                Grilled paneer with Indian spices.
-            </p>
-
-        </div>
-
-
-        <div class="food-right">
-
-            <div class="food-image-box">
-
-                <img
-                    src="static/images/paneer_tikka.jpg"
-                    class="food-item-image"
-                    alt="Paneer Tikka"
-                >
-
-            </div>
-
-
-            <button
-                class="add-btn"
-                onclick="addToCart('Paneer Tikka',200)"
-            >
-                Add
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div class="food-card">
-
-        <div class="food-info">
-
-            <h3>
-                Veg Biryani
-            </h3>
-
-            <p class="price">
-                ₹180
-            </p>
-
-            <p class="food-description">
-                Fragrant rice cooked with fresh vegetables.
-            </p>
-
-        </div>
-
-
-        <div class="food-right">
-
-            <div class="food-image-box">
-
-                <img
-                    src="static/images/veg_biryani.jpg"
-                    class="food-item-image"
-                    alt="Veg Biryani"
-                >
-
-            </div>
-
-
-            <button
-                class="add-btn"
-                onclick="addToCart('Veg Biryani',180)"
-            >
-                Add
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div class="food-card">
-
-        <div class="food-info">
-
-            <h3>
-                Dal Makhani
-            </h3>
-
-            <p class="price">
-                ₹160
-            </p>
-
-            <p class="food-description">
-                Rich creamy black lentils.
-            </p>
-
-        </div>
-
-
-        <div class="food-right">
-
-            <div class="food-image-box">
-
-                <img
-                    src="static/images/dal_makhani.jpg"
-                    class="food-item-image"
-                    alt="Dal Makhani"
-                >
-
-            </div>
-
-
-            <button
-                class="add-btn"
-                onclick="addToCart('Dal Makhani',160)"
-            >
-                Add
-            </button>
-
-        </div>
-
-    </div>
-
 
 </div>
 ```
-
-</div>
-
-<div class="bottom-buttons">
-
-```
-<a
-    href="cart.html"
-    class="view-cart-btn"
->
-    🛒 View Cart
-</a>
-
-
-<a
-    href="stores.html"
-    class="home-link"
->
-    ← Back To Stores
-</a>
-```
-
-</div>
 
 <script>
 

@@ -11,7 +11,7 @@
 </head>
 
 
-<body>
+<body class = "payment-page">
 
 
 <h1 class="cart-title">
@@ -21,75 +21,91 @@
 </h1>
 
 
-
 <div class="payment-box">
 
-
+```
 <h2>
-Choose Payment Method
+    💳 Choose Payment Method
 </h2>
 
+<p>
+    Customer:
+    <strong>{{ order["name"] }}</strong>
+</p>
 
 
-<form action="/confirm_order" method="POST">
+<form
+    action="{{ url_for('confirm_order') }}"
+    method="POST"
+>
+
+    <div class="payment-option">
+
+        <input
+            type="radio"
+            name="payment"
+            value="COD"
+            id="cod"
+            required
+        >
+
+        <label for="cod">
+            💵 Cash On Delivery
+        </label>
+
+    </div>
 
 
-<label>
+    <div class="payment-option">
 
-<input type="radio" name="payment" value="COD" required>
+        <input
+            type="radio"
+            name="payment"
+            value="UPI"
+            id="upi"
+        >
 
-💵 Cash On Delivery
+        <label for="upi">
+            📱 UPI Payment
+        </label>
 
-</label>
-
-
-<br><br>
-
-
-<label>
-
-<input type="radio" name="payment" value="UPI">
-
-📱 UPI Payment
-
-</label>
+    </div>
 
 
+    <div class="payment-option">
 
-<br><br>
+        <input
+            type="radio"
+            name="payment"
+            value="Card"
+            id="card"
+        >
 
+        <label for="card">
+            💳 Card Payment
+        </label>
 
-<label>
-
-<input type="radio" name="payment" value="Card">
-
-💳 Card Payment
-
-</label>
-
-
-
-<h3>
-
-Total Amount :
-₹{{order.total}}
-
-</h3>
+    </div>
 
 
-
-<button class="checkout-btn">
-
-Confirm Order
-
-</button>
+    <h3>
+        Total Amount:
+        ₹{{ order["total"] }}
+    </h3>
 
 
+    <button
+        type="submit"
+        class="checkout-btn"
+    >
+        Confirm Order
+    </button>
 
 </form>
-
+```
 
 </div>
+
 
 
 </body>

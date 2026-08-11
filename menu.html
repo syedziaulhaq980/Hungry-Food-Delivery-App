@@ -4,7 +4,7 @@
 
 <head>
 
-```
+
 <meta charset="UTF-8">
 
 <meta name="viewport"
@@ -12,18 +12,18 @@
 
 <title>Hungry - Menu</title>
 
-<link rel="stylesheet" href="static/style.css">
-```
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 
 </head>
 
-<body>
+<body class ="menu-page">
 
 <!-- NAVBAR -->
 
 <div class="navbar">
 
-```
+
 <div class="logo">
     🍔 Hungry
 </div>
@@ -60,7 +60,7 @@
 
 <div class="restaurant-banner">
 
-```
+
 <img
     src="static/images/biryani_house.jpg"
     class="restaurant-image"
@@ -87,7 +87,7 @@
     </p>
 
 </div>
-```
+
 
 </div>
 
@@ -95,7 +95,7 @@
 
 <div class="menu-container">
 
-```
+
 <!-- BIRYANI -->
 
 <div class="category-card">
@@ -412,7 +412,7 @@
 
 
 </div>
-```
+
 
 </div>
 
@@ -420,7 +420,7 @@
 
 <div class="bottom-buttons">
 
-```
+
 <a
     href="cart.html"
     class="view-cart-btn"
@@ -435,7 +435,7 @@
 >
     ← Back To Stores
 </a>
-```
+
 
 </div>
 
